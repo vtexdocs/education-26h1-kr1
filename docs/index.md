@@ -21,7 +21,7 @@ Phase 1 establishes a repeatable way to measure how well users find VTEX knowled
 
 | Document | Description |
 |----------|-------------|
-| [2026H1 KRs proposal](planning/2026H1%20KRs%20proposal.html) | Education team 2026 KRs and KR1 context |
+| [2026H1 KRs proposal](https://docs.google.com/document/d/1U2iGhOUAVXZdTj323yj3rhc0z1qAwfq73vI-3Ccnk1I/edit?tab=t.mnom07rzgl64#heading=h.1pag77fz0jd) | Education team 2026 KRs and KR1 context |
 | [Planning phase 1 (tests)](planning/Planning%20phase%201%20(tests).html) | Phase 1 scope, paths, test-suite structure, metrics |
 | [Task planning KR1 Phase 1](planning/Task%20planning%20KR1%20Phase%201.html) | Jira tasks, ownership, and timeline for Phase 1 |
 

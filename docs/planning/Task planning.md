@@ -22,6 +22,19 @@ This document organises tasks for **KR1: Documentation infrastructure for conten
 
 ### Issues + queries (Weeks 1–2)
 
+#### Initial plan + project structure
+
+- **Name:** Initial plan + project structure
+- **Description:**
+  1. Document and communicate the initial plan for Phase 1 (testing phase): scope, timelines, discovery paths (External search, Internal search, Agents), and deliverables. Align with [Planning phase 1 (tests).md](https://github.com/vtexdocs/education-26h1-kr1/blob/master/docs/planning/Planning%20phase%201%20(tests).md).
+  2. Set up the project structure in the repo: define folder layout, key documentation locations, and any templates or placeholders needed for the test suite and subsequent work.
+  3. Run kick-off meeting
+
+  *Project repo:* [education-26h1-kr1](https://github.com/vtexdocs/education-26h1-kr1)
+- **Due date:** 2026-02-05
+- **Assignee:** Pedro Antunes Costa
+- **Priority:** High
+
 #### Create issue/query template and example row
 
 - **Name:** Create issue/query template and example row

@@ -30,4 +30,5 @@ Phase 1 establishes a repeatable way to measure how well users find VTEX knowled
 - **Champion:** Pedro Antunes Costa  
 - **Team:** Bárbara Celi, Isabella Veloso Sa, Ricardo José Correia da Silva  
 
+**Jira epic:** [EDU-17421 — KR1 Documentation infrastructure](https://vtex-dev.atlassian.net/browse/EDU-17421)  
 **Epic due date:** 2026-06-30

@@ -21,21 +21,21 @@ This document plans the **testing phase** of KR 1: building a test suite that me
 
 ---
 
-## 2. Knowledge-finding paths
+## 2. Knowledge-finding paths and query types
 
-These are the ways users (and agents) can find VTEX knowledge. We test all of them.
+These are the ways users (and agents) can find VTEX knowledge. We test all of them. We use **3 query types**; each path uses one of these types.
 
-| Path | Description | Entry point / surface |
-|------|--------------|------------------------|
-| **Google Search** | Organic web search; users often land on Help Center or Developer Portal via Google. No site: restriction so we see full discoverability (our docs, community, third-party). | google.com |
-| **Portal search** | On-site search (e.g. Algolia) on Help Center and/or Developer Portal. | In-portal search box |
-| **Proprietary search API** | Simple search API; one of several knowledge sources used by the MCP. Keyword-style queries (Algolia-like). Can be called directly for testing or future portal replacement. | Direct API calls (REST) |
-| **MCP** | VTEX docs MCP used inside Cursor or other agents; returns markdown from VTEX content. Uses the proprietary search API. | Agent calls MCP search tool |
-| **External LLMs** | ChatGPT, Claude, etc. using web search or browsing; may hit Help Center or general web. | User asks LLM; LLM may fetch VTEX pages |
+| Query type | Paths that use it | Description |
+|------------|-------------------|-------------|
+| **External search (Google)** | Google Search | Organic web search; users often land on Help Center or Developer Portal via Google. No site: restriction so we see full discoverability (our docs, community, third-party). Entry: google.com |
+| **Internal search (Algolia/Proprietary API)** | Portal search, Proprietary search API | On-site search (e.g. Algolia) on Help Center and/or Developer Portal; or direct calls to the simple search API (keyword-style, Algolia-like). Entry: in-portal search box or REST API. |
+| **Agents (MCP/LLMs)** | MCP, External LLMs | VTEX docs MCP used inside Cursor or other agents (returns markdown from VTEX content); or ChatGPT, Claude, etc. using web search/browsing. Entry: agent calls MCP search tool, or user asks LLM. |
+
+**Paths (surfaces we test):** Google Search | Portal search | Proprietary search API | MCP | External LLMs.
 
 **Optional (if in scope later):** In-product search, API reference–specific search.
 
-**Why list them:** Tech writers and the team need a shared list so we know (1) which surfaces we’re testing and (2) that the same user “issue” can be queried differently per path (e.g. long natural query for Google vs short keywords for portal).
+**Why 3 query types:** Tech writers fill one query array per type (external, internal, agents). The *wording* varies by type (e.g. natural-language for external/agents, keyword-style for internal), but we avoid duplicating query fields across five paths.
 
 ---
 
@@ -47,9 +47,9 @@ Issues should cover different user personas so the test suite reflects how real 
 
 | Persona | Description | Target share |
 |---------|-------------|--------------|
-| **Ecommerce operators** | Admin panel tasks, catalog management, payment method setup, inventory management, etc. | 40% |
-| **Developers** | Storefront customization, Backoffice integration, APIs, etc. | 40% |
-| **Decision makers** | Checking platform capabilities, security, compliance, etc. | 20% |
+| **Store operator** | Admin panel tasks, catalog management, payment method setup, inventory management, etc. | 40% |
+| **Developer** | Storefront customization, Backoffice integration, APIs, etc. | 40% |
+| **Decision maker** | Checking platform capabilities, security, compliance, etc. | 20% |
 
 We plan the **persona mix from the start**: when collecting issues, tech writers tag each with a persona and we aim for the suite to land in these proportions (~40 / ~40 / ~20) from the first round (see §3.3 scope).
 
@@ -64,22 +64,22 @@ Each issue is a concrete situation a user might face (e.g. “How do I configure
 
 ### 3.3 Process
 
-1. **Scope:** Four tech writers, each specializing in 1–2 products. Each TW contributes **5–8 issues** from their product(s) (~20–32 issues total). Plan **persona mix from the start:** when collecting issues, aim for ~40% Ecommerce operators, ~40% Developers, ~20% Decision makers (e.g. each TW plans their contribution with this mix in mind, or we assign persona quotas at kickoff so the consolidated suite lands in these proportions).
+1. **Scope:** Four tech writers, each specializing in 1–2 products. Each TW contributes **5–8 issues** from their product(s) (~20–32 issues total). Plan **persona mix from the start:** when collecting issues, aim for ~40% Store operator, ~40% Developer, ~20% Decision maker (e.g. each TW plans their contribution with this mix in mind, or we assign persona quotas at kickoff so the consolidated suite lands in these proportions).
 2. **Template:** For each issue, tech writers fill:
    - **Issue ID** (e.g. `P1-01`)
-   - **Persona** (Ecommerce operators | Developers | Decision makers)
+   - **Persona** (Store operator | Developer | Decision maker)
    - **Product / vertical**
    - **User intent** (short description)
    - **Expected outcome:** Doc URL or doc ID (and optionally section) that should be found.
    - **Source** (optional): e.g. “top 5 most viewed”, “support ticket pattern”.
-3. **Queries per path:** For **every** knowledge-finding path we use the **same format**: an **array** of query objects (`query` + optional `style`). For each issue, **we need exactly one query of each type per finding path**: one **naive**, one **familiar**, one **expert**. So each path’s array has exactly 3 entries per issue. Query **types** (same for all paths):
+3. **Queries per query type:** We use **3 query types** (§2). For each issue we use the **same format**: an **array** of query objects (`query` + optional `style`). For each issue, **we need exactly one query of each style per query type**: one **naive**, one **familiar**, one **expert**. So each query type’s array has exactly 3 entries per issue. Query **styles** (same for all types):
    - **naive** — Plain-language goal or problem; no product jargon (e.g. “checkout without saving customer profile”).
    - **familiar** — Some product/domain terms; not the exact feature name (e.g. “guest checkout VTEX”, “anonymous checkout”).
    - **expert** — Official or canonical phrasing; close to doc/feature name (e.g. “how to enable guest checkout”).
 
-   The *wording* of queries may vary by path (e.g. longer natural-language for Google/MCP/LLM, shorter keywords for Portal/API), but the requirement—one of each type per issue, per path—applies to every knowledge-finding path.
+   The *wording* varies by query type: natural-language for **External search** and **Agents**; keyword-style for **Internal search**. Paths then use the appropriate array (Google → external; Portal & API → internal; MCP & LLMs → agents).
 
-Tech writers propose one query of each type (naive, familiar, expert) per path; the team refines and verifies that each issue has exactly one of each type per finding path.
+Tech writers propose one query of each style (naive, familiar, expert) per query type; the team refines and verifies that each issue has exactly one of each style per query type.
 
 ### 3.4 Proposed structure (artifact)
 
@@ -88,17 +88,17 @@ A single **test suite artifact** (e.g. spreadsheet or JSON). Tech writers regist
 | Field | Type | Description |
 |-------|------|-------------|
 | issue_id | string | e.g. `P1-01` |
-| persona | string | Ecommerce operators \| Developers \| Decision makers |
+| persona | string | Store operator \| Developer \| Decision maker |
 | product | string | Product / vertical |
 | user_intent | string | Short description |
 | expected_doc_url | string | Ground truth for success measurement (see §5) |
-| query_google | array | `[{ "query": "...", "style": "naive"\|"familiar"\|"expert" }, ...]` — **one of each type** (naive, familiar, expert) per issue; queries used for Google Search |
-| query_portal | array | `[{ "query": "...", "style": "naive"\|"familiar"\|"expert" }, ...]` — **one of each type** per issue; wording typically keyword-style for portal search |
-| query_api | array | `[{ "query": "...", "style": "naive"\|"familiar"\|"expert" }, ...]` — **one of each type** per issue; wording typically keyword-style for proprietary search API |
-| query_mcp_llm | array | `[{ "query": "...", "style": "naive"\|"familiar"\|"expert" }, ...]` — **one of each type** per issue; wording typically natural questions and intent phrases for MCP/LLM |
+| query_external | array | `[{ "query": "...", "style": "naive"\|"familiar"\|"expert" }, ...]` — **one of each style** per issue; used for **External search (Google)**; wording natural-language |
+| query_internal | array | `[{ "query": "...", "style": "naive"\|"familiar"\|"expert" }, ...]` — **one of each style** per issue; used for **Internal search** (Portal + Proprietary API); wording keyword-style |
+| query_agents | array | `[{ "query": "...", "style": "naive"\|"familiar"\|"expert" }, ...]` — **one of each style** per issue; used for **Agents** (MCP + External LLMs); wording natural questions and intent phrases |
 
 - **expected_doc_url** = ground truth for success measurement (see §5).
-- **query_*** = array of query objects. Each object: **query** (string), **style** (optional: `naive` \| `familiar` \| `expert`). **Exactly one query of each type** (naive, familiar, expert) per issue, per finding path—so 3 entries per path per issue. Runners iterate over each array and run every query; results can be aggregated per path and per style.
+- **query_external** = used by Google Search path. **query_internal** = used by Portal search and Proprietary search API paths. **query_agents** = used by MCP and External LLMs paths.
+- Each query array: **query** (string), **style** (optional: `naive` \| `familiar` \| `expert`). **Exactly one query of each style** per issue, per query type—so 3 entries per query type per issue. Runners iterate over the relevant array per path; results can be aggregated per path and per style.
 
 ---
 
@@ -122,27 +122,30 @@ We run tests **in parallel by path**: each of the four team members owns 1–2 k
 
 - **Method:** Call Algolia API with the query; capture top N results (e.g. top 5 or 10) with URL/title.
 - **Tool:** Script (e.g. Node/JS or Python) using Algolia (or current portal search) API.
-- **Output:** For each (issue_id, query, path), store: list of (rank, url, title). Run **every query** in the path’s query array for each issue.
+- **Query source:** **query_internal** (Internal search).
+- **Output:** For each (issue_id, query, path=portal), store: list of (rank, url, title). Run every query in **query_internal** for each issue.
 
 ### 4.2 Proprietary search API (used by MCP)
 
 - **Method:** Call the internal search API directly (REST). This API is **one** source of knowledge used by the MCP (not the only one); it is a **simple search** (keyword-style). Testing it in isolation lets us measure this path and compare with portal (Algolia) and full MCP. Enables future use (e.g. portal replacement).
 - **Tool:** Script that calls the search API with each query; capture top N results (URL/snippet).
-- **Query source:** Use **query_api** array for this path (same keyword-style as portal). **query_mcp_llm** is for the full MCP/LLM experience.
-- **Output:** For each (issue_id, query, path=api), store: list of (rank, url or doc_ref). Run every query in the array.
+- **Query source:** **query_internal** (Internal search).
+- **Output:** For each (issue_id, query, path=api), store: list of (rank, url or doc_ref). Run every query in **query_internal** for each issue.
 - **Note:** Requires documented endpoints and an accessible route (per alignment with Bruno).
 
 ### 4.3 MCP
 
 - **Method:** Use an agent (e.g., in Cursor) that calls the VTEX docs MCP search tool with the query; capture returned doc refs or snippets.
 - **Tool:** Script or agent workflow that invokes MCP with each query and logs returned URIs/snippets.
-- **Output:** For each (issue_id, query, path=mcp), store: list of (rank, doc_ref or url). Run every query in **query_mcp_llm** for each issue.
+- **Query source:** **query_agents** (Agents).
+- **Output:** For each (issue_id, query, path=mcp), store: list of (rank, doc_ref or url). Run every query in **query_agents** for each issue.
 
 ### 4.4 Google Search
 
 - **Method:** Programmatic search (no site restriction).
 - **Tool:** Google Search API or manual.
-- **Output:** For each (issue_id, query, path=google), store: list of (rank, url, title). Run every query in **query_google** for each issue.
+- **Query source:** **query_external** (External search).
+- **Output:** For each (issue_id, query, path=google), store: list of (rank, url, title). Run every query in **query_external** for each issue.
 - **Note:** If API is not available or too costly, run a sample manually and record results in the same format.
 
 ### 4.5 External LLMs (ChatGPT, Claude, etc.)
@@ -151,7 +154,8 @@ We run tests **in parallel by path**: each of the four team members owns 1–2 k
   - **A. Manual:** Fixed prompt per query (e.g. “Answer using VTEX docs: [query]”); human records whether the answer pointed to the expected doc.
   - **B. Semi-automated:** Same prompts, but “LLM-as-judge” step: second LLM call that scores whether the answer addresses the issue (e.g. 1–5 or binary). Maybe Cursor commands can help here.
   - **C. Programmatic:** Invoke LLMs via APIs (e.g. [OpenRouter](https://openrouter.ai/docs) for a single endpoint to ChatGPT/Claude and others, or direct OpenAI/Anthropic APIs); run prompts in a script, then evaluate results (human or LLM-as-judge).
-- **Output:** For each (issue_id, query, path=llm), store: at least pass/fail or score; optionally link to expected doc. Run every query in **query_mcp_llm** for each issue.
+- **Query source:** **query_agents** (Agents).
+- **Output:** For each (issue_id, query, path=llm), store: at least pass/fail or score; optionally link to expected doc. Run every query in **query_agents** for each issue.
 
 *Each path owner chooses manual vs automated (e.g. Google/LLMs can start as sample or manual) and implements accordingly.*
 
@@ -194,7 +198,7 @@ For each issue, **expected outcome** = one primary doc (URL or ID) that should b
 - **Primary:** For each (issue, path), **pass** = expected doc appears in **top K** results (e.g. top 3 or top 5). **Fail** = it does not.
 - **Aggregate:** 
   - **Per path:** % of queries that pass (e.g. “Portal: 70%”, “MCP: 55%”).
-  - **Per persona:** % of queries that pass (e.g. Ecommerce operators: 72%, Developers: 65%, Decision makers: 80%) so we see if one persona is underserved.
+  - **Per persona:** % of queries that pass (e.g. Store operator: 72%, Developer: 65%, Decision maker: 80%) so we see if one persona is underserved.
   - **Per query style:** % that pass for naive vs familiar vs expert (so we see if “less sophisticated” queries are underserved).
   - **Overall:** % across all (issue, path, query) combinations.
 - **Optional:** Relevance score (1–5) for ranking quality; can be added later (human or LLM judge).
@@ -236,7 +240,7 @@ For each issue, **expected outcome** = one primary doc (URL or ID) that should b
 
 ### A. Example issue/query row
 
-| issue_id | persona | product | user_intent | expected_doc_url | query_google | query_portal | query_api | query_mcp_llm |
-|----------|---------|---------|-------------|------------------|--------------|--------------|-----------|---------------|
-| HC-01 | Ecommerce operators | Checkout | How to enable guest checkout | https://help.vtex.com/…/guest-checkout | enable guest checkout VTEX | guest checkout | guest checkout | How do I enable guest checkout? |
+| issue_id | persona | product | user_intent | expected_doc_url | query_external | query_internal | query_agents |
+|----------|---------|---------|-------------|------------------|----------------|----------------|--------------|
+| HC-01 | Store operator | Checkout | How to enable guest checkout | https://help.vtex.com/…/guest-checkout | enable guest checkout VTEX | guest checkout | How do I enable guest checkout? |
 

@@ -2,7 +2,7 @@
 
 ## Intro
 
-This document organises tasks for **KR1: Documentation infrastructure for content discoverability** (2026H1). The first phase is the **testing phase**: build a test suite that measures how well users find VTEX knowledge across all discovery paths (Google Search, Portal search, Proprietary search API, MCP, External LLMs), then run a baseline before improvements. Phase 1 runs for **6 weeks** from kick off **2026-02-03**. Detailed scope, paths, and deliverables are in [Planning phase 1 (tests).md](Planning%20phase%201%20(tests).md). Tech writers register queries for the baseline test suite in the [baseline test suite spreadsheet](https://docs.google.com/spreadsheets/d/1PbbIDcIhRnBQJPQzA-N-lifxURH_ywohXUqd9nAldZg/edit?gid=0#gid=0).
+This document organises tasks for **KR1: Documentation infrastructure for content discoverability** (2026H1). The first phase is the **testing phase**: build a test suite that measures how well users find VTEX knowledge across all discovery paths, using 3 query types: External search (Google), Internal search (Algolia/Proprietary API), Agents (MCP/LLMs), then run a baseline before improvements. Phase 1 runs for **6 weeks** from kick off **2026-02-03**. Detailed scope, paths, and deliverables are in [Planning phase 1 (tests).md](Planning%20phase%201%20(tests).md). Tech writers register queries for the baseline test suite in the [baseline test suite spreadsheet](https://docs.google.com/spreadsheets/d/1PbbIDcIhRnBQJPQzA-N-lifxURH_ywohXUqd9nAldZg/edit?gid=0#gid=0).
 
 ---
 
@@ -28,7 +28,7 @@ This document organises tasks for **KR1: Documentation infrastructure for conten
 - **Description:**
   1. Define the template for each test-suite row with columns:
      - issue_id, persona, product, user_intent, expected_doc_url
-     - query_google, query_portal, query_api, query_mcp_llm
+     - query_external, query_internal, query_agents
   2. Document the template and how to fill each field.
   3. Add one complete example row (e.g. guest checkout) so tech writers can follow the same format when submitting issues. The template is used in the [baseline test suite spreadsheet](https://docs.google.com/spreadsheets/d/1PbbIDcIhRnBQJPQzA-N-lifxURH_ywohXUqd9nAldZg/edit?gid=0#gid=0).
 
@@ -44,10 +44,10 @@ This document organises tasks for **KR1: Documentation infrastructure for conten
 - **Description:**
   1. Submit 5–8 issues from your product(s) using the agreed template. For each issue include:
      - Persona, user intent, expected outcome (doc URL), optional source
-  2. For each issue, add or refine query variants per path:
-     - Google: natural-language
-     - Portal/API: keyword-style
-     - MCP/LLM: natural question
+  2. For each issue, add or refine query variants per query type:
+     - External search (Google): natural-language
+     - Internal search (Algolia/Proprietary API): keyword-style
+     - Agents (MCP/LLMs): natural question
   3. Contribute your rows to the single consolidated test suite artifact: [baseline test suite spreadsheet](https://docs.google.com/spreadsheets/d/1PbbIDcIhRnBQJPQzA-N-lifxURH_ywohXUqd9nAldZg/edit?gid=0#gid=0) (columns as per §3.4 of the phase 1 plan).
 
   *Collectively aim for ~20–32 issues total and persona mix ~40/40/20.*
@@ -63,10 +63,10 @@ This document organises tasks for **KR1: Documentation infrastructure for conten
 - **Description:**
   1. Submit 5–8 issues from your product(s) using the agreed template. For each issue include:
      - Persona, user intent, expected outcome (doc URL), optional source
-  2. For each issue, add or refine query variants per path:
-     - Google: natural-language
-     - Portal/API: keyword-style
-     - MCP/LLM: natural question
+  2. For each issue, add or refine query variants per query type:
+     - External search (Google): natural-language
+     - Internal search (Algolia/Proprietary API): keyword-style
+     - Agents (MCP/LLMs): natural question
   3. Contribute your rows to the single consolidated test suite artifact: [baseline test suite spreadsheet](https://docs.google.com/spreadsheets/d/1PbbIDcIhRnBQJPQzA-N-lifxURH_ywohXUqd9nAldZg/edit?gid=0#gid=0) (columns as per §3.4 of the phase 1 plan).
 
   *Collectively aim for ~20–32 issues total and persona mix ~40/40/20.*
@@ -82,10 +82,10 @@ This document organises tasks for **KR1: Documentation infrastructure for conten
 - **Description:**
   1. Submit 5–8 issues from your product(s) using the agreed template. For each issue include:
      - Persona, user intent, expected outcome (doc URL), optional source
-  2. For each issue, add or refine query variants per path:
-     - Google: natural-language
-     - Portal/API: keyword-style
-     - MCP/LLM: natural question
+  2. For each issue, add or refine query variants per query type:
+     - External search (Google): natural-language
+     - Internal search (Algolia/Proprietary API): keyword-style
+     - Agents (MCP/LLMs): natural question
   3. Contribute your rows to the single consolidated test suite artifact: [baseline test suite spreadsheet](https://docs.google.com/spreadsheets/d/1PbbIDcIhRnBQJPQzA-N-lifxURH_ywohXUqd9nAldZg/edit?gid=0#gid=0) (columns as per §3.4 of the phase 1 plan).
 
   *Collectively aim for ~20–32 issues total and persona mix ~40/40/20.*
@@ -101,10 +101,10 @@ This document organises tasks for **KR1: Documentation infrastructure for conten
 - **Description:**
   1. Submit 5–8 issues from your product(s) using the agreed template. For each issue include:
      - Persona, user intent, expected outcome (doc URL), optional source
-  2. For each issue, add or refine query variants per path:
-     - Google: natural-language
-     - Portal/API: keyword-style
-     - MCP/LLM: natural question
+  2. For each issue, add or refine query variants per query type:
+     - External search (Google): natural-language
+     - Internal search (Algolia/Proprietary API): keyword-style
+     - Agents (MCP/LLMs): natural question
   3. Contribute your rows to the single consolidated test suite artifact: [baseline test suite spreadsheet](https://docs.google.com/spreadsheets/d/1PbbIDcIhRnBQJPQzA-N-lifxURH_ywohXUqd9nAldZg/edit?gid=0#gid=0) (columns as per §3.4 of the phase 1 plan).
 
   *Collectively aim for ~20–32 issues total and persona mix ~40/40/20.*
@@ -119,9 +119,9 @@ This document organises tasks for **KR1: Documentation infrastructure for conten
 - **Name:** Verify persona mix in test suite
 - **Description:**
   1. Check the consolidated test suite in the [baseline test suite spreadsheet](https://docs.google.com/spreadsheets/d/1PbbIDcIhRnBQJPQzA-N-lifxURH_ywohXUqd9nAldZg/edit?gid=0#gid=0) against the target persona distribution:
-     - ~40% Ecommerce operators
-     - ~40% Developers
-     - ~20% Decision makers
+     - ~40% Store operator
+     - ~40% Developer
+     - ~20% Decision maker
   2. If the mix is off, adjust rows or request additional issues from tech writers.
   3. Lock the test suite for the building phase once the mix is acceptable.
 
@@ -156,7 +156,7 @@ This document organises tasks for **KR1: Documentation infrastructure for conten
   1. Implement a runner for the **Google Search** path (organic web search; no site restriction so we see full discoverability—our docs, community, third-party).
   2. **Method:** Programmatic search (no site restriction). If Google Search API is not available or too costly, run a sample manually and record results in the same format.
   3. **Tool:** Script using Google Search API, or manual recording.
-  4. The runner must: read the test suite artifact and *query_google*; run each query; output results in the agreed unified format (see §4.6). For each (issue_id, query, path=google), store: list of (rank, url, title).
+  4. The runner must: read the test suite artifact and *query_external*; run each query; output results in the agreed unified format (see §4.6). For each (issue_id, query, path=google), store: list of (rank, url, title).
   5. Deliver the runner script or workflow so it can be run in Week 5.
 
   *Project repo:* [education-26h1-kr1](https://github.com/vtexdocs/education-26h1-kr1)
@@ -171,7 +171,7 @@ This document organises tasks for **KR1: Documentation infrastructure for conten
   1. Implement a runner for the **Algolia (Help Center)** path—on-site search on the Help Center. Path ownership is assigned at kickoff.
   2. **Method:** Call Algolia API with the query; capture top N results (e.g. top 5 or 10) with URL/title. Use the Help Center Algolia index.
   3. **Tool:** Script (e.g. Node/JS or Python) using Algolia (or current Help Center portal search) API.
-  4. The runner must: read the test suite artifact and *query_portal*; run each query; output results in the agreed unified format (see §4.6). For each (issue_id, query, path), store: list of (rank, url, title).
+  4. The runner must: read the test suite artifact and *query_internal*; run each query; output results in the agreed unified format (see §4.6). For each (issue_id, query, path), store: list of (rank, url, title).
   5. Deliver the runner script so it can be run in Week 5.
 
   *Project repo:* [education-26h1-kr1](https://github.com/vtexdocs/education-26h1-kr1)
@@ -186,7 +186,7 @@ This document organises tasks for **KR1: Documentation infrastructure for conten
   1. Implement a runner for the **Algolia (Dev Portal)** path—on-site search on the Developer Portal. Path ownership is assigned at kickoff.
   2. **Method:** Call Algolia API with the query; capture top N results (e.g. top 5 or 10) with URL/title. Use the Developer Portal Algolia index.
   3. **Tool:** Script (e.g. Node/JS or Python) using Algolia (or current Dev Portal search) API.
-  4. The runner must: read the test suite artifact and *query_portal*; run each query; output results in the agreed unified format (see §4.6). For each (issue_id, query, path), store: list of (rank, url, title).
+  4. The runner must: read the test suite artifact and *query_internal*; run each query; output results in the agreed unified format (see §4.6). For each (issue_id, query, path), store: list of (rank, url, title).
   5. Deliver the runner script so it can be run in Week 5.
 
   *Project repo:* [education-26h1-kr1](https://github.com/vtexdocs/education-26h1-kr1)
@@ -199,7 +199,7 @@ This document organises tasks for **KR1: Documentation infrastructure for conten
 - **Name:** Implement Proprietary search API path runner
 - **Description:**
   1. Implement a runner for the **Proprietary search API** path—simple search API used by the MCP; keyword-style queries (Algolia-like). Call the internal search API directly (REST).
-  2. **Method:** Call the internal search API with each query; capture top N results (URL/snippet). Use *query_portal* (or equivalent)—short, keyword-style queries (e.g. “guest checkout”, “configure payment”), not long natural-language questions. *query_mcp_llm* is for the full MCP/LLM experience.
+  2. **Method:** Call the internal search API with each query; capture top N results (URL/snippet). Use *query_internal*—short, keyword-style queries (e.g. “guest checkout”, “configure payment”), not long natural-language questions. *query_agents* is for the full MCP/LLM experience.
   3. **Tool:** Script that calls the search API with each query. Requires documented endpoints and an accessible route (per alignment with Bruno).
   4. The runner must: read the test suite artifact; run each query; output results in the agreed unified format (see §4.6). For each (issue_id, query, path=api), store: list of (rank, url or doc_ref).
   5. Deliver the runner script so it can be run in Week 5.
@@ -215,7 +215,7 @@ This document organises tasks for **KR1: Documentation infrastructure for conten
 - **Description:**
   1. Implement a runner for the **MCP** path—VTEX docs MCP used inside Cursor or other agents; returns markdown from VTEX content; uses the proprietary search API. Path ownership is assigned at kickoff.
   2. **Method:** Use an agent (e.g. in Cursor) that calls the VTEX docs MCP search tool with the query; capture returned doc refs or snippets.
-  3. **Tool:** Script or agent workflow that invokes MCP with each query and logs returned URIs/snippets. Use *query_mcp_llm* (natural question) for this path.
+  3. **Tool:** Script or agent workflow that invokes MCP with each query and logs returned URIs/snippets. Use *query_agents* (natural question) for this path.
   4. The runner must: read the test suite artifact; run each query; output results in the agreed unified format (see §4.6). For each (issue_id, query, path=mcp), store: list of (rank, doc_ref or url).
   5. Deliver the runner script or workflow so it can be run in Week 5.
 
@@ -230,7 +230,7 @@ This document organises tasks for **KR1: Documentation infrastructure for conten
 - **Description:**
   1. Implement a runner for the **External LLMs** path—ChatGPT, Claude, etc. using web search or browsing; may hit Help Center or general web. Path ownership is assigned at kickoff.
   2. **Method:** Choose one of: (A) Manual: fixed prompt per query (e.g. “Answer using VTEX docs: [query]”); human records whether the answer pointed to the expected doc. (B) Semi-automated: same prompts + “LLM-as-judge” step (second LLM call scores whether the answer addresses the issue). (C) Programmatic: invoke LLMs via APIs (e.g. OpenRouter or direct OpenAI/Anthropic); run prompts in a script, then evaluate (human or LLM-as-judge).
-  3. The runner/workflow must: read the test suite artifact and *query_mcp_llm*; run each query; output results in the agreed unified format (see §4.6). For each (issue_id, query, path=llm), store: at least pass/fail or score; optionally link to expected doc. For LLM path, *top_results* can be replaced or complemented by *answer_relevant* (boolean) or *score* (number).
+  3. The runner/workflow must: read the test suite artifact and *query_agents*; run each query; output results in the agreed unified format (see §4.6). For each (issue_id, query, path=llm), store: at least pass/fail or score; optionally link to expected doc. For LLM path, *top_results* can be replaced or complemented by *answer_relevant* (boolean) or *score* (number).
   4. Deliver the runner or workflow so it can be run in Week 5.
 
   *Project repo:* [education-26h1-kr1](https://github.com/vtexdocs/education-26h1-kr1)

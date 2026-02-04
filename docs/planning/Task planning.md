@@ -2,7 +2,7 @@
 
 ## Intro
 
-This document organises tasks for **KR1: Documentation infrastructure for content discoverability** (2026H1). The first phase is the **testing phase**: build a test suite that measures how well users find VTEX knowledge across all discovery paths, using 3 query types: External search (Google), Internal search (Algolia/Proprietary API), Agents (MCP/LLMs), then run a baseline before improvements. Phase 1 runs for **6 weeks** from kick off **2026-02-03**. Detailed scope, paths, and deliverables are in [Planning phase 1 (tests).md](Planning%20phase%201%20(tests).md). Tech writers register queries for the baseline test suite in the [baseline test suite spreadsheet](https://docs.google.com/spreadsheets/d/1PbbIDcIhRnBQJPQzA-N-lifxURH_ywohXUqd9nAldZg/edit?gid=0#gid=0).
+This document organises tasks for **KR1: Documentation infrastructure for content discoverability** (2026H1). The first phase is the **testing phase**: build a test suite that measures how well users find VTEX knowledge across all discovery paths, using 3 query types: External search (Google), Internal search (Algolia/Proprietary API), Agents (MCP/LLMs), then run a baseline before improvements. Phase 1 runs for **6 weeks** from kick off **2026-02-03**. Detailed scope, paths, and deliverables are in [Planning phase 1 (tests).md](Planning%20phase%201%20(tests).html). Tech writers register queries for the baseline test suite in the [baseline test suite spreadsheet](https://docs.google.com/spreadsheets/d/1PbbIDcIhRnBQJPQzA-N-lifxURH_ywohXUqd9nAldZg/edit?gid=0#gid=0).
 
 ---
 

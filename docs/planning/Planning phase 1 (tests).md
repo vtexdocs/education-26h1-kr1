@@ -5,7 +5,7 @@
 | Created  | Feb 3, 2026 |
 | Champion | [Pedro Antunes Costa](mailto:pedro.costa@vtex.com) |
 | Duration | 6 weeks |
-| Parent   | [KR 1 — First steps plan](KR%201%20-%20First%20steps%20plan.md) |
+| Parent   | [KR 1 — First steps plan](KR%201%20-%20First%20steps%20plan.html) |
 
 This document plans the **testing phase** of KR 1: building a test suite that measures how well users find VTEX knowledge across all discovery paths, then running a baseline before improvements.
 
@@ -80,6 +80,22 @@ Each issue is a concrete situation a user might face (e.g. “How do I configure
    The *wording* varies by query type: natural-language for **External search** and **Agents**; keyword-style for **Internal search**. Paths then use the appropriate array (Google → external; Portal & API → internal; MCP & LLMs → agents).
 
 Tech writers propose one query of each style (naive, familiar, expert) per query type; the team refines and verifies that each issue has exactly one of each style per query type.
+
+### 3.3.1 Cursor command: generate-knowledge-queries
+
+To speed up query creation, use the **generate-knowledge-queries** Cursor command (`.cursor/commands/generate-knowledge-queries.md`). It generates one naive, one familiar, and one expert query per selected query type, then optionally adds the issue as a row to the test suite spreadsheet.
+
+**Usage:** Invoke the command and provide (or reply when prompted):
+
+1. **User issue or target document** (required) — Short user intent (e.g. “How to enable guest checkout”) or the URL/markdown of the doc that should be found (the command infers the issue).
+2. **Query type(s)** (required) — Reply with one or more letters:
+   - **A** — External search (Google)
+   - **B** — Internal search (Algolia/Proprietary API)
+   - **C** — Agents (MCP/LLMs)
+
+**Example:** Run the command, then when asked for query types reply e.g. `A B C`. The command produces a Markdown file with the issue and the three queries per type, then asks whether to add the issue as a new row in the [baseline test suite spreadsheet](https://docs.google.com/spreadsheets/d/1PbbIDcIhRnBQJPQzA-N-lifxURH_ywohXUqd9nAldZg/edit?gid=0#gid=0).
+
+Full behaviour, inputs, and spreadsheet details are in `.cursor/commands/generate-knowledge-queries.md`.
 
 ### 3.4 Proposed structure (artifact)
 

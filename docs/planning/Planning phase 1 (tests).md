@@ -21,9 +21,9 @@ This document plans the **testing phase** of KR 1: building a test suite that me
 
 ---
 
-## 2. Knowledge-finding paths (given)
+## 2. Knowledge-finding paths
 
-Paths are set; we don’t plan a discovery phase for them. These are the ways users (and agents) can find VTEX knowledge; we test all of them.
+These are the ways users (and agents) can find VTEX knowledge. We test all of them.
 
 | Path | Description | Entry point / surface |
 |------|--------------|------------------------|

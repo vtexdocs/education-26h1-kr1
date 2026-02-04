@@ -72,23 +72,33 @@ Each issue is a concrete situation a user might face (e.g. “How do I configure
    - **User intent** (short description)
    - **Expected outcome:** Doc URL or doc ID (and optionally section) that should be found.
    - **Source** (optional): e.g. “top 5 most viewed”, “support ticket pattern”.
-3. **Queries per path:** For each issue, we define one or more **queries** that a user might type on that path. Same issue can have:
-   - **Google:** longer, natural-language query.
-   - **Portal:** often shorter, keyword-style.
-   - **MCP / LLM:** natural question (e.g. “How do I …?”).
+3. **Queries per path:** For **every** knowledge-finding path we use the **same format**: an **array** of query objects (`query` + optional `style`). For each issue, **we need exactly one query of each type per finding path**: one **naive**, one **familiar**, one **expert**. So each path’s array has exactly 3 entries per issue. Query **types** (same for all paths):
+   - **naive** — Plain-language goal or problem; no product jargon (e.g. “checkout without saving customer profile”).
+   - **familiar** — Some product/domain terms; not the exact feature name (e.g. “guest checkout VTEX”, “anonymous checkout”).
+   - **expert** — Official or canonical phrasing; close to doc/feature name (e.g. “how to enable guest checkout”).
 
-Tech writers can propose query variants; the team can refine and add path-specific variants.
+   The *wording* of queries may vary by path (e.g. longer natural-language for Google/MCP/LLM, shorter keywords for Portal/API), but the requirement—one of each type per issue, per path—applies to every knowledge-finding path.
+
+Tech writers propose one query of each type (naive, familiar, expert) per path; the team refines and verifies that each issue has exactly one of each type per finding path.
 
 ### 3.4 Proposed structure (artifact)
 
-A single **test suite artifact** (e.g. spreadsheet or JSON) with rows like:
+A single **test suite artifact** (e.g. spreadsheet or JSON). Tech writers register issues and queries in the [baseline test suite spreadsheet](https://docs.google.com/spreadsheets/d/1PbbIDcIhRnBQJPQzA-N-lifxURH_ywohXUqd9nAldZg/edit?gid=0#gid=0). Each issue has one row (or one object); **query fields are arrays** of objects with `query` and optional `style`:
 
-| issue_id | persona | product | user_intent | expected_doc_url | query_google | query_portal | query_api | query_mcp_llm |
-|----------|---------|---------|-------------|------------------|--------------|--------------|-----------|---------------|
-| P1-01    | Ecommerce operators | Product X | How to configure Y | https://… | how to configure Y in VTEX | configure Y | configure Y | How do I configure Y? |
+| Field | Type | Description |
+|-------|------|-------------|
+| issue_id | string | e.g. `P1-01` |
+| persona | string | Ecommerce operators \| Developers \| Decision makers |
+| product | string | Product / vertical |
+| user_intent | string | Short description |
+| expected_doc_url | string | Ground truth for success measurement (see §5) |
+| query_google | array | `[{ "query": "...", "style": "naive"\|"familiar"\|"expert" }, ...]` — **one of each type** (naive, familiar, expert) per issue; queries used for Google Search |
+| query_portal | array | `[{ "query": "...", "style": "naive"\|"familiar"\|"expert" }, ...]` — **one of each type** per issue; wording typically keyword-style for portal search |
+| query_api | array | `[{ "query": "...", "style": "naive"\|"familiar"\|"expert" }, ...]` — **one of each type** per issue; wording typically keyword-style for proprietary search API |
+| query_mcp_llm | array | `[{ "query": "...", "style": "naive"\|"familiar"\|"expert" }, ...]` — **one of each type** per issue; wording typically natural questions and intent phrases for MCP/LLM |
 
 - **expected_doc_url** = ground truth for success measurement (see §5).
-- **query_*** columns = query text used for each path. **query_api** = query for the proprietary search API (simple search); use **keyword-style**, same as **query_portal**. **query_mcp_llm** = natural question for full MCP/LLM experience.
+- **query_*** = array of query objects. Each object: **query** (string), **style** (optional: `naive` \| `familiar` \| `expert`). **Exactly one query of each type** (naive, familiar, expert) per issue, per finding path—so 3 entries per path per issue. Runners iterate over each array and run every query; results can be aggregated per path and per style.
 
 ---
 
@@ -112,27 +122,27 @@ We run tests **in parallel by path**: each of the four team members owns 1–2 k
 
 - **Method:** Call Algolia API with the query; capture top N results (e.g. top 5 or 10) with URL/title.
 - **Tool:** Script (e.g. Node/JS or Python) using Algolia (or current portal search) API.
-- **Output:** For each (issue_id, query, path), store: list of (rank, url, title).
+- **Output:** For each (issue_id, query, path), store: list of (rank, url, title). Run **every query** in the path’s query array for each issue.
 
 ### 4.2 Proprietary search API (used by MCP)
 
 - **Method:** Call the internal search API directly (REST). This API is **one** source of knowledge used by the MCP (not the only one); it is a **simple search** (keyword-style). Testing it in isolation lets us measure this path and compare with portal (Algolia) and full MCP. Enables future use (e.g. portal replacement).
 - **Tool:** Script that calls the search API with each query; capture top N results (URL/snippet).
-- **Query style:** Same as portal—short, keyword-style queries (e.g. “guest checkout”, “configure payment”), not long natural-language questions. Use **query_portal** (or equivalent) for this path; **query_mcp_llm** is for the full MCP/LLM experience.
-- **Output:** For each (issue_id, query, path=api), store: list of (rank, url or doc_ref).
+- **Query source:** Use **query_api** array for this path (same keyword-style as portal). **query_mcp_llm** is for the full MCP/LLM experience.
+- **Output:** For each (issue_id, query, path=api), store: list of (rank, url or doc_ref). Run every query in the array.
 - **Note:** Requires documented endpoints and an accessible route (per alignment with Bruno).
 
 ### 4.3 MCP
 
 - **Method:** Use an agent (e.g., in Cursor) that calls the VTEX docs MCP search tool with the query; capture returned doc refs or snippets.
 - **Tool:** Script or agent workflow that invokes MCP with each query and logs returned URIs/snippets.
-- **Output:** For each (issue_id, query, path=mcp), store: list of (rank, doc_ref or url).
+- **Output:** For each (issue_id, query, path=mcp), store: list of (rank, doc_ref or url). Run every query in **query_mcp_llm** for each issue.
 
 ### 4.4 Google Search
 
 - **Method:** Programmatic search (no site restriction).
 - **Tool:** Google Search API or manual.
-- **Output:** For each (issue_id, query, path=google), store: list of (rank, url, title).
+- **Output:** For each (issue_id, query, path=google), store: list of (rank, url, title). Run every query in **query_google** for each issue.
 - **Note:** If API is not available or too costly, run a sample manually and record results in the same format.
 
 ### 4.5 External LLMs (ChatGPT, Claude, etc.)
@@ -141,13 +151,15 @@ We run tests **in parallel by path**: each of the four team members owns 1–2 k
   - **A. Manual:** Fixed prompt per query (e.g. “Answer using VTEX docs: [query]”); human records whether the answer pointed to the expected doc.
   - **B. Semi-automated:** Same prompts, but “LLM-as-judge” step: second LLM call that scores whether the answer addresses the issue (e.g. 1–5 or binary). Maybe Cursor commands can help here.
   - **C. Programmatic:** Invoke LLMs via APIs (e.g. [OpenRouter](https://openrouter.ai/docs) for a single endpoint to ChatGPT/Claude and others, or direct OpenAI/Anthropic APIs); run prompts in a script, then evaluate results (human or LLM-as-judge).
-- **Output:** For each (issue_id, query, path=llm), store: at least pass/fail or score; optionally link to expected doc.
+- **Output:** For each (issue_id, query, path=llm), store: at least pass/fail or score; optionally link to expected doc. Run every query in **query_mcp_llm** for each issue.
 
 *Each path owner chooses manual vs automated (e.g. Google/LLMs can start as sample or manual) and implements accordingly.*
 
 ### 4.6 Output format (unified)
 
 Store results in a simple, path-agnostic format so we can compute metrics the same way for every path. Example (JSON per run):
+
+One result object per (issue_id, path, query). Optional `query_style` allows reporting pass rate by style (naive / familiar / expert).
 
 ```json
 {
@@ -157,6 +169,7 @@ Store results in a simple, path-agnostic format so we can compute metrics the sa
       "issue_id": "P1-01",
       "path": "portal",
       "query": "configure Y",
+      "query_style": "expert",
       "top_results": [
         { "rank": 1, "url": "https://...", "title": "..." },
         { "rank": 2, "url": "https://...", "title": "..." }
@@ -182,7 +195,8 @@ For each issue, **expected outcome** = one primary doc (URL or ID) that should b
 - **Aggregate:** 
   - **Per path:** % of queries that pass (e.g. “Portal: 70%”, “MCP: 55%”).
   - **Per persona:** % of queries that pass (e.g. Ecommerce operators: 72%, Developers: 65%, Decision makers: 80%) so we see if one persona is underserved.
-  - **Overall:** % across all (issue, path) pairs.
+  - **Per query style:** % that pass for naive vs familiar vs expert (so we see if “less sophisticated” queries are underserved).
+  - **Overall:** % across all (issue, path, query) combinations.
 - **Optional:** Relevance score (1–5) for ranking quality; can be added later (human or LLM judge).
 
 ### 5.3 Baseline report
@@ -197,7 +211,7 @@ For each issue, **expected outcome** = one primary doc (URL or ID) that should b
 
 | Phase | Duration | Focus | Tasks |
 |-------|----------|--------|--------|
-| **Issues + queries** | 2 weeks | Collect and consolidate | **Week 1:** Create issue/query template and example row; kickoff with tech writers (scope = each TW 5–8 issues; persona mix ~40/40/20 from the start). TWs submit issues with expected doc and persona. **Week 2:** Team adds query variants per path; consolidate test suite artifact (spreadsheet/JSON); verify persona mix. |
+| **Issues + queries** | 2 weeks | Collect and consolidate | **Week 1:** Create issue/query template and example row; kickoff with tech writers (scope = each TW 5–8 issues; persona mix ~40/40/20 from the start). TWs submit issues with expected doc and persona. **Week 2:** Team adds queries per path (one of each type—naive, familiar, expert—per issue, per finding path); consolidate test suite artifact (spreadsheet/JSON); verify persona mix. |
 | **Building the tests** | 2 weeks | Runners (parallel by path) | **Week 3:** Agree unified output format (§4.6). Each path owner implements runner for their path(s) in parallel. **Week 4:** Run smoke tests per path; fix issues; runners ready. |
 | **Running the tests** | 1 week | Baseline run | **Week 5:** Each owner runs full test suite on their path(s); capture results in unified format. Aggregate raw results. Implement success metric; compute pass rate per path, per persona, overall; produce baseline report and list of failures. |
 | **Review + mapping gaps** | 1 week | Handoff | **Week 6:** Review baseline with team; document gaps and improvement ideas; prioritise next steps; handoff to implementation phase. |

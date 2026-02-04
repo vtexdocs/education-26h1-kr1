@@ -2,7 +2,7 @@
 
 ## Intro
 
-This document organises tasks for **KR1: Documentation infrastructure for content discoverability** (2026H1). The first phase is the **testing phase**: build a test suite that measures how well users find VTEX knowledge across all discovery paths (Google Search, Portal search, Proprietary search API, MCP, External LLMs), then run a baseline before improvements. Phase 1 runs for **6 weeks** from kick off **2026-02-03**. Detailed scope, paths, and deliverables are in [Planning phase 1 (tests).md](Planning%20phase%201%20(tests).md).
+This document organises tasks for **KR1: Documentation infrastructure for content discoverability** (2026H1). The first phase is the **testing phase**: build a test suite that measures how well users find VTEX knowledge across all discovery paths (Google Search, Portal search, Proprietary search API, MCP, External LLMs), then run a baseline before improvements. Phase 1 runs for **6 weeks** from kick off **2026-02-03**. Detailed scope, paths, and deliverables are in [Planning phase 1 (tests).md](Planning%20phase%201%20(tests).md). Tech writers register queries for the baseline test suite in the [baseline test suite spreadsheet](https://docs.google.com/spreadsheets/d/1PbbIDcIhRnBQJPQzA-N-lifxURH_ywohXUqd9nAldZg/edit?gid=0#gid=0).
 
 ---
 
@@ -30,7 +30,7 @@ This document organises tasks for **KR1: Documentation infrastructure for conten
      - issue_id, persona, product, user_intent, expected_doc_url
      - query_google, query_portal, query_api, query_mcp_llm
   2. Document the template and how to fill each field.
-  3. Add one complete example row (e.g. guest checkout) so tech writers can follow the same format when submitting issues.
+  3. Add one complete example row (e.g. guest checkout) so tech writers can follow the same format when submitting issues. The template is used in the [baseline test suite spreadsheet](https://docs.google.com/spreadsheets/d/1PbbIDcIhRnBQJPQzA-N-lifxURH_ywohXUqd9nAldZg/edit?gid=0#gid=0).
 
   *Project repo:* [education-26h1-kr1](https://github.com/vtexdocs/education-26h1-kr1)
 - **Due date:** 2026-02-11
@@ -48,7 +48,7 @@ This document organises tasks for **KR1: Documentation infrastructure for conten
      - Google: natural-language
      - Portal/API: keyword-style
      - MCP/LLM: natural question
-  3. Contribute your rows to the single consolidated test suite artifact (spreadsheet or JSON) with columns as per §3.4 of the phase 1 plan.
+  3. Contribute your rows to the single consolidated test suite artifact: [baseline test suite spreadsheet](https://docs.google.com/spreadsheets/d/1PbbIDcIhRnBQJPQzA-N-lifxURH_ywohXUqd9nAldZg/edit?gid=0#gid=0) (columns as per §3.4 of the phase 1 plan).
 
   *Collectively aim for ~20–32 issues total and persona mix ~40/40/20.*
 
@@ -67,7 +67,7 @@ This document organises tasks for **KR1: Documentation infrastructure for conten
      - Google: natural-language
      - Portal/API: keyword-style
      - MCP/LLM: natural question
-  3. Contribute your rows to the single consolidated test suite artifact (spreadsheet or JSON) with columns as per §3.4 of the phase 1 plan.
+  3. Contribute your rows to the single consolidated test suite artifact: [baseline test suite spreadsheet](https://docs.google.com/spreadsheets/d/1PbbIDcIhRnBQJPQzA-N-lifxURH_ywohXUqd9nAldZg/edit?gid=0#gid=0) (columns as per §3.4 of the phase 1 plan).
 
   *Collectively aim for ~20–32 issues total and persona mix ~40/40/20.*
 
@@ -86,7 +86,7 @@ This document organises tasks for **KR1: Documentation infrastructure for conten
      - Google: natural-language
      - Portal/API: keyword-style
      - MCP/LLM: natural question
-  3. Contribute your rows to the single consolidated test suite artifact (spreadsheet or JSON) with columns as per §3.4 of the phase 1 plan.
+  3. Contribute your rows to the single consolidated test suite artifact: [baseline test suite spreadsheet](https://docs.google.com/spreadsheets/d/1PbbIDcIhRnBQJPQzA-N-lifxURH_ywohXUqd9nAldZg/edit?gid=0#gid=0) (columns as per §3.4 of the phase 1 plan).
 
   *Collectively aim for ~20–32 issues total and persona mix ~40/40/20.*
 
@@ -105,7 +105,7 @@ This document organises tasks for **KR1: Documentation infrastructure for conten
      - Google: natural-language
      - Portal/API: keyword-style
      - MCP/LLM: natural question
-  3. Contribute your rows to the single consolidated test suite artifact (spreadsheet or JSON) with columns as per §3.4 of the phase 1 plan.
+  3. Contribute your rows to the single consolidated test suite artifact: [baseline test suite spreadsheet](https://docs.google.com/spreadsheets/d/1PbbIDcIhRnBQJPQzA-N-lifxURH_ywohXUqd9nAldZg/edit?gid=0#gid=0) (columns as per §3.4 of the phase 1 plan).
 
   *Collectively aim for ~20–32 issues total and persona mix ~40/40/20.*
 
@@ -118,7 +118,7 @@ This document organises tasks for **KR1: Documentation infrastructure for conten
 
 - **Name:** Verify persona mix in test suite
 - **Description:**
-  1. Check the consolidated test suite against the target persona distribution:
+  1. Check the consolidated test suite in the [baseline test suite spreadsheet](https://docs.google.com/spreadsheets/d/1PbbIDcIhRnBQJPQzA-N-lifxURH_ywohXUqd9nAldZg/edit?gid=0#gid=0) against the target persona distribution:
      - ~40% Ecommerce operators
      - ~40% Developers
      - ~20% Decision makers

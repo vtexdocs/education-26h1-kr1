@@ -1,10 +1,75 @@
 {% comment %}
-  Renders nav from site.pages (auto-updates when docs change). Flat list sorted by URL.
+  Renders nav from site.pages: folder hierarchy + collapsible sections.
+  Auto-updates when docs change (Jekyll rebuild on deploy).
 {% endcomment %}
+{% assign id_prefix = include.id_prefix | default: "nav" %}
 {% assign nav_pages = site.pages | where_exp: "p", "p.url != '/'" | where_exp: "p", "p.url != ''" | sort: "url" %}
+
+{% assign prev_seg1 = "" %}
+{% assign prev_seg2 = "" %}
+{% assign last_parts_size = 0 %}
+{% assign lid = "" %}
 {% for p in nav_pages %}
+  {% assign path_trimmed = p.url | remove_first: "/" | split: "?" | first %}
+  {% assign parts = path_trimmed | split: "/" %}
+  {% assign seg1 = parts[0] %}
+  {% assign seg2 = parts[1] %}
+  {% assign is_leaf = false %}
+  {% if parts.size == 1 %}
+    {% assign is_leaf = true %}
+  {% endif %}
+  {% assign last_parts_size = parts.size %}
+
+  {% if seg1 != prev_seg1 %}
+    {% if prev_seg1 != "" %}
+      </ul></li>
+    {% endif %}
+    {% assign prev_seg1 = seg1 %}
+    {% assign prev_seg2 = "" %}
+    {% if is_leaf %}
 <li>
-  {% assign p_href = p.url | relative_url %}
-  <a href="{{ p_href }}" {% if page.url == p_href %}class="active"{% endif %}>{{ p.title | default: p.name | replace: ".md", "" }}</a>
+  <a href="{{ p.url | relative_url }}" {% if page.url == p.url %}class="active"{% endif %}>{{ p.title | default: p.name | replace: ".md", "" }}</a>
 </li>
+    {% else %}
+      {% assign lid = id_prefix | append: "-" | append: seg1 | replace: " ", "-" %}
+<li>
+  <div class="nav-item-head">
+    <span class="nav-label">{{ seg1 | replace: "-", " " | capitalize }}</span>
+    <button type="button" class="nav-toggle" aria-label="Toggle" data-controls="{{ lid }}" aria-expanded="true"></button>
+  </div>
+  <ul id="{{ lid }}" class="nav-children">
+    {% endif %}
+  {% endif %}
+
+  {% unless is_leaf %}
+    {% if parts.size == 2 %}
+<li>
+  <a href="{{ p.url | relative_url }}" {% if page.url == p.url %}class="active"{% endif %}>{{ p.title | default: p.name | replace: ".md", "" }}</a>
+</li>
+    {% elsif parts.size >= 3 %}
+      {% if seg2 != prev_seg2 %}
+        {% if prev_seg2 != "" %}
+        </ul></li>
+        {% endif %}
+        {% assign prev_seg2 = seg2 %}
+        {% assign lid2 = lid | append: "-" | append: seg2 | replace: " ", "-" %}
+<li>
+  <div class="nav-item-head">
+    <span class="nav-label">{{ seg2 | replace: "-", " " | capitalize }}</span>
+    <button type="button" class="nav-toggle" aria-label="Toggle" data-controls="{{ lid2 }}" aria-expanded="true"></button>
+  </div>
+  <ul id="{{ lid2 }}" class="nav-children">
+      {% endif %}
+<li>
+  <a href="{{ p.url | relative_url }}" {% if page.url == p.url %}class="active"{% endif %}>{{ p.title | default: p.name | replace: ".md", "" }}</a>
+</li>
+    {% endif %}
+  {% endunless %}
 {% endfor %}
+
+{% if prev_seg1 != "" %}
+  {% if last_parts_size >= 3 %}
+  </ul></li>
+  {% endif %}
+  </ul></li>
+{% endif %}

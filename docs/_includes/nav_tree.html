@@ -1,37 +1,10 @@
 {% comment %}
-  Renders nav tree from site.pages. Pass: current_dir (e.g. "/" or "/planning/"), id_prefix (e.g. "nav").
+  Renders nav from site.pages (auto-updates when docs change). Flat list sorted by URL.
 {% endcomment %}
-{% assign all_dirs = site.pages | map: "dir" | uniq | sort %}
-{% assign pages_here = site.pages | where_exp: "p", "p.dir == current_dir" | where_exp: "p", "p.url != '/'" | sort: "url" %}
-
-{% for p in pages_here %}
+{% assign nav_pages = site.pages | where_exp: "p", "p.url != '/'" | where_exp: "p", "p.url != ''" | sort: "url" %}
+{% for p in nav_pages %}
 <li>
   {% assign p_href = p.url | relative_url %}
   <a href="{{ p_href }}" {% if page.url == p_href %}class="active"{% endif %}>{{ p.title | default: p.name | replace: ".md", "" }}</a>
 </li>
-{% endfor %}
-{% for d in all_dirs %}
-  {% if d != current_dir and d.size > current_dir.size %}
-    {% assign starts = d | slice: 0, current_dir.size %}
-    {% if starts == current_dir %}
-      {% assign rest = d | slice: current_dir.size, 50 %}
-      {% assign rest_parts = rest | split: "/" %}
-      {% if rest_parts.size == 2 %}
-        {% assign segment = rest_parts | first %}
-        {% assign subdir_pages = site.pages | where_exp: "p", "p.dir == d" %}
-        {% if subdir_pages.size > 0 %}
-          <li class="has-children">
-            <div class="nav-item-head">
-              <span class="nav-label" style="color:#57606a;font-weight:600;">{{ segment }}</span>
-              <button type="button" class="nav-toggle" aria-label="Toggle {{ segment }}" aria-expanded="true" data-controls="{{ id_prefix }}-{{ forloop.index }}"></button>
-            </div>
-            <ul class="nav-children" id="{{ id_prefix }}-{{ forloop.index }}">
-              {% capture child_id %}{{ id_prefix }}-{{ forloop.index }}{% endcapture %}
-              {% include nav_tree.html current_dir=d id_prefix=child_id %}
-            </ul>
-          </li>
-        {% endif %}
-      {% endif %}
-    {% endif %}
-  {% endif %}
 {% endfor %}

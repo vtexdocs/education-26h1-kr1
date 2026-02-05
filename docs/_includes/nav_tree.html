@@ -16,9 +16,11 @@
   {% assign seg2 = parts[1] %}
   {% assign seg1_first = seg1 | slice: 0, 1 %}
   {% assign seg2_first = seg2 | slice: 0, 1 %}
+  {% assign skip = false %}
   {% if seg1_first == "_" or seg1 | downcase == "assets" or seg2_first == "_" %}
-    {% continue %}
+    {% assign skip = true %}
   {% endif %}
+  {% unless skip %}
   {% assign is_leaf = false %}
   {% if parts.size == 1 %}
     {% assign is_leaf = true %}
@@ -69,6 +71,7 @@
   <a href="{{ p.url | relative_url }}" {% if page.url == p.url %}class="active"{% endif %}>{{ p.title | default: p.name | replace: ".md", "" }}</a>
 </li>
     {% endif %}
+  {% endunless %}
   {% endunless %}
 {% endfor %}
 

@@ -10,15 +10,22 @@
 {% assign last_parts_size = 0 %}
 {% assign lid = "" %}
 {% for p in nav_pages %}
-  {% assign path_trimmed = p.url | remove_first: "/" | split: "?" | first %}
+  {% assign url_stripped = p.url | remove_first: site.baseurl | remove_first: "/" %}
+  {% assign path_trimmed = url_stripped | split: "?" | first %}
   {% assign parts = path_trimmed | split: "/" %}
   {% assign seg1 = parts[0] %}
   {% assign seg2 = parts[1] %}
   {% assign seg1_first = seg1 | slice: 0, 1 %}
-  {% assign seg2_first = seg2 | slice: 0, 1 %}
   {% assign skip = false %}
-  {% if seg1_first == "_" or seg1 | downcase == "assets" or seg2_first == "_" %}
+  {% if seg1 == "" or seg1 == nil %}
     {% assign skip = true %}
+  {% elsif seg1_first == "_" or seg1 | downcase == "assets" %}
+    {% assign skip = true %}
+  {% elsif seg2 != nil and seg2 != "" %}
+    {% assign seg2_first = seg2 | slice: 0, 1 %}
+    {% if seg2_first == "_" %}
+      {% assign skip = true %}
+    {% endif %}
   {% endif %}
   {% unless skip %}
   {% assign is_leaf = false %}

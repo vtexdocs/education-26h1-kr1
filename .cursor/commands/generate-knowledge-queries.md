@@ -45,7 +45,7 @@ The agent receives the command; the user may append parameters after the command
 
 ### 3. Create Markdown document
 
-- Create a new `.md` file (e.g. in `docs/planning/issues/` or a path you propose) containing:
+- Create a new `.md` file (e.g. in `docs/test-suite/issues/` or a path you propose) containing:
   - **Issue:** issue_id, persona, product, user_intent, expected_doc_url (and optional source).
   - **Queries:** for each selected query type, the type name and the three queries (naive, familiar, expert) in a clear table or list.
 - Save the file and tell the user where it is.

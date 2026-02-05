@@ -1,22 +1,3 @@
 title: Education 26H1 KR1
 description: Documentation infrastructure for content discoverability
 theme: jekyll-theme-minimal
-
-# Sidebar nav (mirrors docs folder). Update when adding new docs.
-nav:
-  - title: Home
-    url: /
-  - title: planning
-    children:
-      - title: 2026H1 KRs proposal
-        url: /planning/2026H1%20KRs%20proposal.html
-      - title: Planning phase 1 (tests)
-        url: /planning/Planning%20phase%201%20(tests).html
-      - title: Task planning
-        url: /planning/Task%20planning%20KR1%20Phase%201.html
-      - title: issues
-        children:
-          - title: assortment-prices-per-website
-            url: /planning/issues/assortment-prices-per-website.html
-          - title: orders-feed
-            url: /planning/issues/orders-feed.html

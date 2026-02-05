@@ -12,8 +12,8 @@ The agent receives the command; the user may append parameters after the command
    - **User issue:** Short description of the user intent (e.g. "How to enable guest checkout").
    - **Target document:** Markdown content or URL of the doc that should be found (expected outcome). Use this to infer the user issue and generate queries that should surface this doc.
 
-2. **Query type(s)** (required)
-   - One or more query types. If not provided, ask the user with **lettered options** so they can reply with one or more letters (e.g. "A B C"):
+2. **Query type(s)** (optional, default: all)
+   - One or more query types. If not provided, the agent generates queries for **all** query types (A, B, C, D). To restrict, the user may append one or more letters (e.g. "A B C"):
 
    **A** — External search (Google)  
    **B** — Internal search (Algolia/Proprietary API)  
@@ -27,7 +27,7 @@ The agent receives the command; the user may append parameters after the command
 ### 1. Collect missing params
 
 - If **user issue / target document** is missing: ask the user to provide either a short user intent description or a target doc (markdown or URL).
-- If **query type(s)** are missing: ask with the lettered list above and say they can answer with one or more letters (e.g. "A", "A B", "A B C D").
+- If **query type(s)** are not provided: treat as **all** query types (A, B, C, D) and generate queries for all four. Do not ask the user.
 
 ### 2. Generate queries
 
@@ -61,7 +61,7 @@ The agent receives the command; the user may append parameters after the command
 
 - Use the **user-sheets-zap** MCP tool `google_sheets_create_spreadsheet_row` to add one row with columns matching the spreadsheet data format (see Planning phase 1 §3.4.1):
   - **Issue columns:** issue_id, persona, product, user_intent, expected_doc_url (plain text).
-  - **Query columns:** query_external, query_internal, query_mcp, query_llm. For each *selected* query type, put in the cell the **stringified JSON array** of exactly 3 objects: `[{"query":"...","style":"naive"},{"query":"...","style":"familiar"},{"query":"...","style":"expert"}]`. For query types the user did **not** select, leave that column empty.
+  - **Query columns:** query_external, query_internal, query_mcp, query_llm. For each query type in scope (all four when none were specified; otherwise only the ones the user specified), put in the cell the **stringified JSON array** of exactly 3 objects: `[{"query":"...","style":"naive"},{"query":"...","style":"familiar"},{"query":"...","style":"expert"}]`. For query types not in scope, leave that column empty.
 - **Spreadsheet:** Use the test suite spreadsheet below. Pass **spreadsheet** = `1PbbIDcIhRnBQJPQzA-N-lifxURH_ywohXUqd9nAldZg` (or the full URL). Default **worksheet** has name='Issues and queries'; if the sheet has a different name, use that as **worksheet**. Only ask the user for spreadsheet/worksheet if they want a different target.
 - In **instructions**, describe the row: issue fields + the query arrays for the selected query types. Include **output_hint** describing what you want back (e.g. "confirmation that the row was created and its row number").
 

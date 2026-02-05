@@ -35,6 +35,33 @@
       }
       .sidebar nav a:hover { color: #0969da; }
       .sidebar nav a.active { color: #0969da; font-weight: 600; }
+      .sidebar .nav-item-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 6px;
+      }
+      .sidebar .nav-item-head a,
+      .sidebar .nav-item-head .nav-label { flex: 1; }
+      .sidebar .nav-toggle {
+        flex-shrink: 0;
+        width: 22px;
+        height: 22px;
+        padding: 0;
+        border: none;
+        background: transparent;
+        color: #57606a;
+        cursor: pointer;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+      }
+      .sidebar .nav-toggle:hover { color: #0969da; background: #eaecef; }
+      .sidebar .nav-toggle::before { content: "\25BC"; }
+      .sidebar .nav-children.collapsed .nav-toggle::before { content: "\25B6"; }
+      .sidebar .nav-children.collapsed { display: none; }
       .main { flex: 1; padding: 20px 40px 40px; min-width: 0; }
       @media (max-width: 768px) {
         .layout { flex-direction: column; }
@@ -50,16 +77,22 @@
           <nav>
             <ul>
               {% for item in site.nav %}
-              <li>
+              <li class="{% if item.children %}has-children{% endif %}">
                 {% assign item_href = item.url | relative_url %}
-                <a href="{{ item_href }}" {% if page.url == item_href %}class="active"{% endif %}>{{ item.title }}</a>
                 {% if item.children %}
-                <ul>
+                <div class="nav-item-head">
+                  {% if item.url %}<a href="{{ item_href }}" {% if page.url == item_href %}class="active"{% endif %}>{{ item.title }}</a>{% else %}<span class="nav-label" style="color:#57606a;font-weight:600;">{{ item.title }}</span>{% endif %}
+                  <button type="button" class="nav-toggle" aria-label="Toggle {{ item.title }}" aria-expanded="true" data-controls="nav-{{ forloop.index }}"></button>
+                </div>
+                <ul class="nav-children" id="nav-{{ forloop.index }}">
                   {% for child in item.children %}
-                  <li>
+                  <li class="{% if child.children %}has-children{% endif %}">
                     {% if child.children %}
-                    <span style="color:#57606a;font-weight:600;">{{ child.title }}</span>
-                    <ul>
+                    <div class="nav-item-head">
+                      <span class="nav-label" style="color:#57606a;font-weight:600;">{{ child.title }}</span>
+                      <button type="button" class="nav-toggle" aria-label="Toggle {{ child.title }}" aria-expanded="true" data-controls="nav-{{ forloop.parentloop.index }}-{{ forloop.index }}"></button>
+                    </div>
+                    <ul class="nav-children" id="nav-{{ forloop.parentloop.index }}-{{ forloop.index }}">
                       {% for sub in child.children %}
                       <li>
                         {% assign sub_href = sub.url | relative_url %}
@@ -74,6 +107,8 @@
                   </li>
                   {% endfor %}
                 </ul>
+                {% else %}
+                <a href="{{ item_href }}" {% if page.url == item_href %}class="active"{% endif %}>{{ item.title }}</a>
                 {% endif %}
               </li>
               {% endfor %}
@@ -94,5 +129,28 @@
       </div>
     </div>
     <script src="{{ "/assets/js/scale.fix.js" | relative_url }}"></script>
+    <script>
+      (function() {
+        var nav = document.querySelector('.sidebar nav');
+        if (!nav) return;
+        nav.addEventListener('click', function(e) {
+          var btn = e.target.closest('.nav-toggle');
+          if (!btn) return;
+          var id = btn.getAttribute('data-controls');
+          var ul = id ? document.getElementById(id) : null;
+          if (!ul) return;
+          ul.classList.toggle('collapsed');
+          btn.setAttribute('aria-expanded', ul.classList.contains('collapsed') ? 'false' : 'true');
+        });
+        nav.querySelectorAll('.nav-children').forEach(function(ul) {
+          if (!ul.querySelector('.active')) ul.classList.add('collapsed');
+        });
+        nav.querySelectorAll('.nav-toggle').forEach(function(btn) {
+          var id = btn.getAttribute('data-controls');
+          var ul = id ? document.getElementById(id) : null;
+          if (ul && ul.classList.contains('collapsed')) btn.setAttribute('aria-expanded', 'false');
+        });
+      })();
+    </script>
   </body>
 </html>

@@ -23,19 +23,20 @@ This document plans the **testing phase** of KR 1: building a test suite that me
 
 ## 2. Knowledge-finding paths and query types
 
-These are the ways users (and agents) can find VTEX knowledge. We test all of them. We use **3 query types**; each path uses one of these types.
+These are the ways users (and agents) can find VTEX knowledge. We test all of them. We use **4 query types**; each path uses one of these types.
 
 | Query type | Paths that use it | Description |
 |------------|-------------------|-------------|
 | **External search (Google)** | Google Search | Organic web search; users often land on Help Center or Developer Portal via Google. No site: restriction so we see full discoverability (our docs, community, third-party). Entry: google.com |
 | **Internal search (Algolia/Proprietary API)** | Portal search, Proprietary search API | On-site search (e.g. Algolia) on Help Center and/or Developer Portal; or direct calls to the simple search API (keyword-style, Algolia-like). Entry: in-portal search box or REST API. |
-| **Agents (MCP/LLMs)** | MCP, External LLMs | VTEX docs MCP used inside Cursor or other agents (returns markdown from VTEX content); or ChatGPT, Claude, etc. using web search/browsing. Entry: agent calls MCP search tool, or user asks LLM. |
+| **MCP (proprietary docs)** | MCP | VTEX docs MCP used inside Cursor or other agents (returns markdown from VTEX content). Entry: agent calls MCP search tool. Queries are tailored to how the MCP is invoked. |
+| **External LLMs** | External LLMs | ChatGPT, Claude, etc. using web search/browsing. Entry: user asks LLM. Queries are tailored to how users phrase questions to external LLMs. |
 
 **Paths (surfaces we test):** Google Search | Portal search | Proprietary search API | MCP | External LLMs.
 
 **Optional (if in scope later):** In-product search, API reference–specific search.
 
-**Why 3 query types:** Tech writers fill one query array per type (external, internal, agents). The *wording* varies by type (e.g. natural-language for external/agents, keyword-style for internal), but we avoid duplicating query fields across five paths.
+**Why 4 query types:** Tech writers fill one query array per type (external, internal, MCP, external LLMs). The *wording* varies by type (e.g. natural-language for external; keyword-style for internal; MCP-specific phrasing for proprietary docs MCP; user-style questions for external LLMs), so we avoid sharing the same queries across paths that expect different phrasing.
 
 ---
 
@@ -72,12 +73,12 @@ Each issue is a concrete situation a user might face (e.g. “How do I configure
    - **User intent** (short description)
    - **Expected outcome:** Doc URL or doc ID (and optionally section) that should be found.
    - **Source** (optional): e.g. “top 5 most viewed”, “support ticket pattern”.
-3. **Queries per query type:** We use **3 query types** (§2). For each issue we use the **same format**: an **array** of query objects (`query` + optional `style`). For each issue, **we need exactly one query of each style per query type**: one **naive**, one **familiar**, one **expert**. So each query type’s array has exactly 3 entries per issue. Query **styles** (same for all types):
+3. **Queries per query type:** We use **4 query types** (§2). For each issue we use the **same format**: an **array** of query objects (`query` + optional `style`). For each issue, **we need exactly one query of each style per query type**: one **naive**, one **familiar**, one **expert**. So each query type’s array has exactly 3 entries per issue. Query **styles** (same for all types):
    - **naive** — Plain-language goal or problem; no product jargon (e.g. “checkout without saving customer profile”).
    - **familiar** — Some product/domain terms; not the exact feature name (e.g. “guest checkout VTEX”, “anonymous checkout”).
    - **expert** — Official or canonical phrasing; close to doc/feature name (e.g. “how to enable guest checkout”).
 
-   The *wording* varies by query type: natural-language for **External search** and **Agents**; keyword-style for **Internal search**. Paths then use the appropriate array (Google → external; Portal & API → internal; MCP & LLMs → agents).
+   The *wording* varies by query type: natural-language for **External search**; keyword-style for **Internal search**; MCP-appropriate phrasing for **MCP (proprietary docs)**; user-style questions for **External LLMs**. Paths then use the appropriate array (Google → external; Portal & API → internal; MCP → query_mcp; External LLMs → query_llm).
 
 Tech writers propose one query of each style (naive, familiar, expert) per query type; the team refines and verifies that each issue has exactly one of each style per query type.
 
@@ -91,9 +92,10 @@ To speed up query creation, use the **generate-knowledge-queries** Cursor comman
 2. **Query type(s)** (required) — Reply with one or more letters:
    - **A** — External search (Google)
    - **B** — Internal search (Algolia/Proprietary API)
-   - **C** — Agents (MCP/LLMs)
+   - **C** — MCP (proprietary docs)
+   - **D** — External LLMs
 
-**Example:** Run the command, then when asked for query types reply e.g. `A B C`. The command produces a Markdown file with the issue and the three queries per type, then asks whether to add the issue as a new row in the [baseline test suite spreadsheet](https://docs.google.com/spreadsheets/d/1PbbIDcIhRnBQJPQzA-N-lifxURH_ywohXUqd9nAldZg/edit?gid=0#gid=0).
+**Example:** Run the command, then when asked for query types reply e.g. `A B C D`. The command produces a Markdown file with the issue and the three queries per type, then asks whether to add the issue as a new row in the [baseline test suite spreadsheet](https://docs.google.com/spreadsheets/d/1PbbIDcIhRnBQJPQzA-N-lifxURH_ywohXUqd9nAldZg/edit?gid=0#gid=0).
 
 Full behaviour, inputs, and spreadsheet details are in `.cursor/commands/generate-knowledge-queries.md`.
 
@@ -110,11 +112,31 @@ A single **test suite artifact** (e.g. spreadsheet or JSON). Tech writers regist
 | expected_doc_url | string | Ground truth for success measurement (see §5) |
 | query_external | array | `[{ "query": "...", "style": "naive"\|"familiar"\|"expert" }, ...]` — **one of each style** per issue; used for **External search (Google)**; wording natural-language |
 | query_internal | array | `[{ "query": "...", "style": "naive"\|"familiar"\|"expert" }, ...]` — **one of each style** per issue; used for **Internal search** (Portal + Proprietary API); wording keyword-style |
-| query_agents | array | `[{ "query": "...", "style": "naive"\|"familiar"\|"expert" }, ...]` — **one of each style** per issue; used for **Agents** (MCP + External LLMs); wording natural questions and intent phrases |
+| query_mcp | array | `[{ "query": "...", "style": "naive"\|"familiar"\|"expert" }, ...]` — **one of each style** per issue; used for **MCP** (proprietary docs); wording tailored to MCP invocation |
+| query_llm | array | `[{ "query": "...", "style": "naive"\|"familiar"\|"expert" }, ...]` — **one of each style** per issue; used for **External LLMs**; wording user-style questions |
 
 - **expected_doc_url** = ground truth for success measurement (see §5).
-- **query_external** = used by Google Search path. **query_internal** = used by Portal search and Proprietary search API paths. **query_agents** = used by MCP and External LLMs paths.
+- **query_external** = used by Google Search path. **query_internal** = used by Portal search and Proprietary search API paths. **query_mcp** = used by MCP path. **query_llm** = used by External LLMs path.
 - Each query array: **query** (string), **style** (optional: `naive` \| `familiar` \| `expert`). **Exactly one query of each style** per issue, per query type—so 3 entries per query type per issue. Runners iterate over the relevant array per path; results can be aggregated per path and per style.
+
+### 3.4.1 Spreadsheet data format
+
+The [baseline test suite spreadsheet](https://docs.google.com/spreadsheets/d/1PbbIDcIhRnBQJPQzA-N-lifxURH_ywohXUqd9nAldZg/edit?gid=0#gid=0) uses one row per issue. **Column order and cell format:**
+
+| Column header | Cell format | Required |
+|---------------|-------------|----------|
+| issue_id | Text (e.g. `P1-01`, `HC-01`) | Yes |
+| persona | Text: `Store operator` \| `Developer` \| `Decision maker` | Yes |
+| product | Text (product or vertical) | Yes |
+| user_intent | Text (short description) | Yes |
+| expected_doc_url | Text (full URL; ground truth for §5) | Yes |
+| query_external | Stringified JSON array of 3 objects: `[{"query":"...","style":"naive"},{"query":"...","style":"familiar"},{"query":"...","style":"expert"}]` | Per issue: fill for paths that use External search |
+| query_internal | Same format; 3 objects, one per style; keyword-style wording | Per issue: fill for Portal + Proprietary API paths |
+| query_mcp | Same format; 3 objects, one per style; MCP-appropriate wording | Per issue: fill for MCP path |
+| query_llm | Same format; 3 objects, one per style; user-style questions | Per issue: fill for External LLMs path |
+
+- **Query columns:** Each query column holds a **single cell value**: the stringified JSON array. Exactly 3 elements per array (naive, familiar, expert). Leave the cell empty if that query type was not filled for the issue.
+- **Worksheet name:** `Issues and queries` (or as set in the sheet). Row 1 = headers; data from row 2 onward.
 
 ---
 
@@ -153,8 +175,8 @@ We run tests **in parallel by path**: each of the four team members owns 1–2 k
 
 - **Method:** Use an agent (e.g., in Cursor) that calls the VTEX docs MCP search tool with the query; capture returned doc refs or snippets.
 - **Tool:** Script or agent workflow that invokes MCP with each query and logs returned URIs/snippets.
-- **Query source:** **query_agents** (Agents).
-- **Output:** For each (issue_id, query, path=mcp), store: list of (rank, doc_ref or url). Run every query in **query_agents** for each issue.
+- **Query source:** **query_mcp** (MCP).
+- **Output:** For each (issue_id, query, path=mcp), store: list of (rank, doc_ref or url). Run every query in **query_mcp** for each issue.
 
 ### 4.4 Google Search
 
@@ -170,8 +192,8 @@ We run tests **in parallel by path**: each of the four team members owns 1–2 k
   - **A. Manual:** Fixed prompt per query (e.g. “Answer using VTEX docs: [query]”); human records whether the answer pointed to the expected doc.
   - **B. Semi-automated:** Same prompts, but “LLM-as-judge” step: second LLM call that scores whether the answer addresses the issue (e.g. 1–5 or binary). Maybe Cursor commands can help here.
   - **C. Programmatic:** Invoke LLMs via APIs (e.g. [OpenRouter](https://openrouter.ai/docs) for a single endpoint to ChatGPT/Claude and others, or direct OpenAI/Anthropic APIs); run prompts in a script, then evaluate results (human or LLM-as-judge).
-- **Query source:** **query_agents** (Agents).
-- **Output:** For each (issue_id, query, path=llm), store: at least pass/fail or score; optionally link to expected doc. Run every query in **query_agents** for each issue.
+- **Query source:** **query_llm** (External LLMs).
+- **Output:** For each (issue_id, query, path=llm), store: at least pass/fail or score; optionally link to expected doc. Run every query in **query_llm** for each issue.
 
 *Each path owner chooses manual vs automated (e.g. Google/LLMs can start as sample or manual) and implements accordingly.*
 
@@ -256,7 +278,17 @@ For each issue, **expected outcome** = one primary doc (URL or ID) that should b
 
 ### A. Example issue/query row
 
-| issue_id | persona | product | user_intent | expected_doc_url | query_external | query_internal | query_agents |
-|----------|---------|---------|-------------|------------------|----------------|----------------|--------------|
-| HC-01 | Store operator | Checkout | How to enable guest checkout | https://help.vtex.com/…/guest-checkout | enable guest checkout VTEX | guest checkout | How do I enable guest checkout? |
+**Simplified (one query per style shown for readability):**
+
+| issue_id | persona | product | user_intent | expected_doc_url | query_external | query_internal | query_mcp | query_llm |
+|----------|---------|---------|-------------|------------------|----------------|----------------|-----------|------------|
+| HC-01 | Store operator | Checkout | How to enable guest checkout | https://help.vtex.com/…/guest-checkout | (3 queries: naive, familiar, expert) | (3 queries: naive, familiar, expert) | (3 queries: naive, familiar, expert) | (3 queries: naive, familiar, expert) |
+
+**Actual spreadsheet cell format for query columns:** each query column is one cell containing the stringified JSON array, e.g. for query_external:
+
+```json
+[{"query":"checkout without saving customer profile","style":"naive"},{"query":"guest checkout VTEX","style":"familiar"},{"query":"how to enable guest checkout","style":"expert"}]
+```
+
+Use the same structure for query_internal, query_mcp, and query_llm (wording per query type as in §2 and §3.3).
 

@@ -2,7 +2,7 @@
 
 ## Overview
 
-Generate query arrays for the KR1 testing phase: one **naive**, one **familiar**, and one **expert** query per **query type** (External search, Internal search, Agents), then optionally add the issue as a row to the test suite spreadsheet. Follow the structure in `docs/planning/Planning phase 1 (tests).md` (§3.3–3.4).
+Generate query arrays for the KR1 testing phase: one **naive**, one **familiar**, and one **expert** query per **query type** (External search, Internal search, MCP, External LLMs), then optionally add the issue as a row to the test suite spreadsheet. Follow the structure in `docs/planning/Planning phase 1 (tests).md` (§3.3–3.4).
 
 ## Input (from command params or user)
 
@@ -17,16 +17,17 @@ The agent receives the command; the user may append parameters after the command
 
    **A** — External search (Google)  
    **B** — Internal search (Algolia/Proprietary API)  
-   **C** — Agents (MCP/LLMs)  
+   **C** — MCP (proprietary docs)  
+   **D** — External LLMs  
 
-   Each query type maps to one array: `query_external`, `query_internal`, `query_agents`. Paths use these arrays: Google → external; Portal & API → internal; MCP & LLMs → agents.
+   Each query type maps to one array: `query_external`, `query_internal`, `query_mcp`, `query_llm`. Paths use these arrays: Google → external; Portal & API → internal; MCP → query_mcp; External LLMs → query_llm.
 
 ## Actions
 
 ### 1. Collect missing params
 
 - If **user issue / target document** is missing: ask the user to provide either a short user intent description or a target doc (markdown or URL).
-- If **query type(s)** are missing: ask with the lettered list above and say they can answer with one or more letters (e.g. "A", "A B", "A B C").
+- If **query type(s)** are missing: ask with the lettered list above and say they can answer with one or more letters (e.g. "A", "A B", "A B C D").
 
 ### 2. Generate queries
 
@@ -38,7 +39,8 @@ The agent receives the command; the user may append parameters after the command
 - **Wording by query type:**
   - **External search (A):** Natural-language.
   - **Internal search (B):** Short, keyword-style.
-  - **Agents (C):** Natural questions and intent phrases.
+  - **MCP (C):** MCP-appropriate phrasing (how the MCP is invoked).
+  - **External LLMs (D):** User-style questions (how users ask ChatGPT, Claude, etc.).
 - Output format per query type: array of objects `[{ "query": "...", "style": "naive"|"familiar"|"expert" }, ...]` with exactly 3 elements.
 
 ### 3. Create Markdown document
@@ -57,10 +59,9 @@ The agent receives the command; the user may append parameters after the command
 
 ### 5. If user said Y (add row)
 
-- Use the **user-sheets-zap** MCP tool `google_sheets_create_spreadsheet_row` to add one row with:
-  - issue_id, persona, product, user_intent, expected_doc_url
-  - query_external, query_internal, query_agents (each as the stringified JSON array of 3 query objects, or in the format the spreadsheet expects)
-- For query types the user did **not** select, leave that column empty in the row (or ask the user).
+- Use the **user-sheets-zap** MCP tool `google_sheets_create_spreadsheet_row` to add one row with columns matching the spreadsheet data format (see Planning phase 1 §3.4.1):
+  - **Issue columns:** issue_id, persona, product, user_intent, expected_doc_url (plain text).
+  - **Query columns:** query_external, query_internal, query_mcp, query_llm. For each *selected* query type, put in the cell the **stringified JSON array** of exactly 3 objects: `[{"query":"...","style":"naive"},{"query":"...","style":"familiar"},{"query":"...","style":"expert"}]`. For query types the user did **not** select, leave that column empty.
 - **Spreadsheet:** Use the test suite spreadsheet below. Pass **spreadsheet** = `1PbbIDcIhRnBQJPQzA-N-lifxURH_ywohXUqd9nAldZg` (or the full URL). Default **worksheet** has name='Issues and queries'; if the sheet has a different name, use that as **worksheet**. Only ask the user for spreadsheet/worksheet if they want a different target.
 - In **instructions**, describe the row: issue fields + the query arrays for the selected query types. Include **output_hint** describing what you want back (e.g. "confirmation that the row was created and its row number").
 

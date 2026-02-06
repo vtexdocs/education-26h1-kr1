@@ -39,21 +39,26 @@
   {% endif %}
   {% assign last_parts_size = parts_size %}
 
+  {% assign seg1_display = seg1 | replace: "%20", " " | replace: "-", " " %}
+  {% assign seg2_display = seg2 | replace: "%20", " " | replace: "-", " " %}
   {% if seg1 != prev_seg1 %}
     {% if prev_seg1 != "" %}
+      {% if prev_seg2 != "" %}
+      </ul></li>
+      {% endif %}
       </ul></li>
     {% endif %}
     {% assign prev_seg1 = seg1 %}
     {% assign prev_seg2 = "" %}
-    {% assign lid = id_prefix | append: "-" | append: seg1 | slugify %}
+    {% assign lid = id_prefix | append: "-" | append: seg1 | replace: "%20", " " | slugify %}
     {% if is_leaf %}
 <li>
   <a href="{{ p.url | relative_url }}" {% if page.url == p.url %}class="active"{% endif %}>{{ p.title | default: p.name | replace: ".md", "" | replace: ".html", "" }}</a>
 </li>
     {% else %}
 <li>
-  <div class="nav-item-head" role="button" tabindex="0" data-controls="{{ lid }}" aria-expanded="true" aria-label="Toggle {{ seg1 }}">
-    <span class="nav-label">{{ seg1 | replace: "-", " " }}</span>
+  <div class="nav-item-head" role="button" tabindex="0" data-controls="{{ lid }}" aria-expanded="true" aria-label="Toggle {{ seg1_display }}">
+    <span class="nav-label">{{ seg1_display }}</span>
     <span class="nav-toggle" aria-hidden="true"></span>
   </div>
   <ul id="{{ lid }}" class="nav-children">
@@ -66,16 +71,15 @@
   <a href="{{ p.url | relative_url }}" {% if page.url == p.url %}class="active"{% endif %}>{{ p.title | default: p.name | replace: ".md", "" | replace: ".html", "" }}</a>
 </li>
     {% elsif parts_size >= 3 %}
-      {% assign seg2_slug = seg2 | slugify %}
       {% if seg2 != prev_seg2 %}
         {% if prev_seg2 != "" %}
         </ul></li>
         {% endif %}
         {% assign prev_seg2 = seg2 %}
-        {% assign lid2 = lid | append: "-" | append: seg2_slug %}
+        {% assign lid2 = lid | append: "-" | append: seg2 | replace: "%20", " " | slugify %}
 <li>
-  <div class="nav-item-head" role="button" tabindex="0" data-controls="{{ lid2 }}" aria-expanded="true" aria-label="Toggle {{ seg2 }}">
-    <span class="nav-label">{{ seg2 | replace: "-", " " }}</span>
+  <div class="nav-item-head" role="button" tabindex="0" data-controls="{{ lid2 }}" aria-expanded="true" aria-label="Toggle {{ seg2_display }}">
+    <span class="nav-label">{{ seg2_display }}</span>
     <span class="nav-toggle" aria-hidden="true"></span>
   </div>
   <ul id="{{ lid2 }}" class="nav-children">

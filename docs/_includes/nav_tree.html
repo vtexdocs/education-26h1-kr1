@@ -3,7 +3,7 @@
   Excludes any path segment starting with '_'. Updates when Jekyll rebuilds (e.g. on deploy).
 {% endcomment %}
 {% assign id_prefix = include.id_prefix | default: "nav" %}
-{% assign nav_pages = site.pages | where_exp: "p", "p.url != '/' and p.url != '' and p.url != '/index.html'" | sort: "url" %}
+{% assign nav_pages = site.pages | sort: "url" %}
 
 {% assign prev_seg1 = "" %}
 {% assign prev_seg2 = "" %}
@@ -11,12 +11,12 @@
 {% for p in nav_pages %}
   {% assign raw_path = p.url | remove_first: site.baseurl | strip %}
   {% assign path_trimmed = raw_path | remove_first: "/" | split: "?" | first | strip %}
-  {% if path_trimmed == "" %}{% continue %}{% endif %}
+  {% if path_trimmed == "" or path_trimmed == "index.html" %}{% continue %}{% endif %}
   {% assign parts = path_trimmed | split: "/" %}
   {% assign skip = false %}
   {% for part in parts %}
     {% assign first_char = part | slice: 0, 1 %}
-    {% if first_char == "_" or part == "" %}
+    {% if first_char == "_" %}
       {% assign skip = true %}
       {% break %}
     {% endif %}
@@ -25,12 +25,19 @@
   {% assign seg2 = parts[1] %}
   {% if seg1 == "assets" or seg1 == "" %}{% assign skip = true %}{% endif %}
   {% if skip %}{% continue %}{% endif %}
-
+  {% assign parts_size = 0 %}
+  {% for part in parts %}
+    {% if part != "" %}
+      {% assign parts_size = parts_size | plus: 1 %}
+    {% endif %}
+  {% endfor %}
+  {% if parts_size == 0 %}{% continue %}{% endif %}
+  {% comment %} Use non-empty segment count for hierarchy (trailing slash adds empty part) {% endcomment %}
   {% assign is_leaf = false %}
-  {% if parts.size == 1 %}
+  {% if parts_size == 1 %}
     {% assign is_leaf = true %}
   {% endif %}
-  {% assign last_parts_size = parts.size %}
+  {% assign last_parts_size = parts_size %}
 
   {% if seg1 != prev_seg1 %}
     {% if prev_seg1 != "" %}
@@ -54,11 +61,11 @@
   {% endif %}
 
   {% unless is_leaf %}
-    {% if parts.size == 2 %}
+    {% if parts_size == 2 %}
 <li>
   <a href="{{ p.url | relative_url }}" {% if page.url == p.url %}class="active"{% endif %}>{{ p.title | default: p.name | replace: ".md", "" | replace: ".html", "" }}</a>
 </li>
-    {% elsif parts.size >= 3 %}
+    {% elsif parts_size >= 3 %}
       {% assign seg2_slug = seg2 | slugify %}
       {% if seg2 != prev_seg2 %}
         {% if prev_seg2 != "" %}

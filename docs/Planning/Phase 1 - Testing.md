@@ -6,6 +6,7 @@
 | Champion | [Pedro Antunes Costa](mailto:pedro.costa@vtex.com) |
 | Duration | 6 weeks |
 | Parent   | [KR 1 — First steps plan](KR%201%20-%20First%20steps%20plan.html) |
+| Related  | [Project phases](Project%20phases.md) |
 
 This document plans the **testing phase** of KR 1: building a test suite that measures how well users find VTEX knowledge across all discovery paths, then running a baseline before improvements.
 

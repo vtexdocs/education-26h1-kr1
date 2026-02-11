@@ -1,5 +1,7 @@
 # education-26h1-kr1
 
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-blue)](https://github.com/vtexdocs/education-26h1-kr1)
+
 Project for **KR1: Documentation infrastructure for content discoverability** (VTEX Education, 2026H1).
 
 ## Purpose
@@ -28,7 +30,7 @@ Discovery paths in scope:
 | Document | Description |
 |----------|-------------|
 | [2026H1 KRs proposal](docs/planning/2026H1%20KRs%20proposal.md) | Education team 2026 KRs and KR1 context |
-| [Planning phase 1 (tests)](docs/planning/Planning%20phase%201%20(tests).md) | Phase 1 scope, paths, test-suite structure, metrics |
+| [Phase 1 - Testing](docs/Planning/Phase%201%20-%20Testing.md) | Phase 1 scope, paths, test-suite structure, metrics |
 | [Task planning KR1 Phase 1](docs/planning/Task%20planning%20KR1%20Phase%201.md) | Jira tasks, ownership, and timeline for Phase 1 |
 
 ## Team

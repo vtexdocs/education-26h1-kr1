@@ -1,4 +1,4 @@
-# KR1 — Project outline: Next phases
+# KR1 — Project phases
 
 | Field | Value |
 | :---- | :---- |
@@ -40,6 +40,8 @@ This document outlines the project phases for **KR1: Documentation infrastructur
 **Status:** In progress
 
 **Purpose:** Establish a repeatable way to measure search/knowledge-finding effectiveness across every path users use to find VTEX docs. Run a baseline so we can prioritise improvements and compare before/after.
+
+**Detailed plan:** See [Phase 1 - Testing](Phase%201%20-%20Testing.md) for the complete testing phase plan.
 
 **Key deliverables:**
 - Test suite artifact (~20–32 issues with queries)

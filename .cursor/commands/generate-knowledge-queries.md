@@ -2,7 +2,7 @@
 
 ## Overview
 
-Generate query arrays for the KR1 testing phase: one **naive**, one **familiar**, and one **expert** query per **query type** (External search, Internal search, MCP, External LLMs), then optionally add the issue as a row to the test suite spreadsheet. Follow the structure in `docs/planning/Planning phase 1 (tests).md` (§3.3–3.4).
+Generate query arrays for the KR1 testing phase: one **naive**, one **familiar**, and one **expert** query per **query type** (External search, Internal search, MCP, External LLMs), then optionally add the issue as a row to the test suite spreadsheet. Follow the structure in `docs/Planning/Phase 1 - Testing.md` (§3.3–3.4).
 
 ## Input (from command params or user)
 
@@ -83,6 +83,6 @@ The agent receives the command; the user may append parameters after the command
 
 ## Reference
 
-- Query structure and query types: `docs/planning/Planning phase 1 (tests).md` (§2, §3.3, §3.4, Appendix A).
-- Persona definitions and target proportions: `docs/planning/Planning phase 1 (tests).md` (§3.1).
+- Query structure and query types: `docs/Planning/Phase 1 - Testing.md` (§2, §3.3, §3.4, Appendix A).
+- Persona definitions and target proportions: `docs/Planning/Phase 1 - Testing.md` (§3.1).
 - Cursor commands: [Commands](https://cursor.com/docs/context/commands).

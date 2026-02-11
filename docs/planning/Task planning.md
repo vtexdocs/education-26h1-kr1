@@ -2,7 +2,7 @@
 
 ## Intro
 
-This document organises tasks for **KR1: Documentation infrastructure for content discoverability** (2026H1). The first phase is the **testing phase**: build a test suite that measures how well users find VTEX knowledge across all discovery paths, using 4 query types: External search (Google), Internal search (Algolia/Proprietary API), MCP (proprietary docs), External LLMs, then run a baseline before improvements. Phase 1 runs for **6 weeks** from kick off **2026-02-03**. Detailed scope, paths, and deliverables are in [Planning phase 1 (tests).md](Planning%20phase%201%20(tests).html). Tech writers register queries for the baseline test suite in the [baseline test suite spreadsheet](https://docs.google.com/spreadsheets/d/1PbbIDcIhRnBQJPQzA-N-lifxURH_ywohXUqd9nAldZg/edit?gid=0#gid=0).
+This document organises tasks for **KR1: Documentation infrastructure for content discoverability** (2026H1). The first phase is the **testing phase**: build a test suite that measures how well users find VTEX knowledge across all discovery paths, using 4 query types: External search (Google), Internal search (Algolia/Proprietary API), MCP (proprietary docs), External LLMs, then run a baseline before improvements. Phase 1 runs for **6 weeks** from kick off **2026-02-03**. Detailed scope, paths, and deliverables are in [Phase 1 - Testing](Phase%201%20-%20Testing.md). Tech writers register queries for the baseline test suite in the [baseline test suite spreadsheet](https://docs.google.com/spreadsheets/d/1PbbIDcIhRnBQJPQzA-N-lifxURH_ywohXUqd9nAldZg/edit?gid=0#gid=0).
 
 ---
 
@@ -26,7 +26,7 @@ This document organises tasks for **KR1: Documentation infrastructure for conten
 
 - **Name:** Initial plan + project structure
 - **Description:**
-  1. Document and communicate the initial plan for Phase 1 (testing phase): scope, timelines, discovery paths (External search, Internal search, MCP, External LLMs), and deliverables. Align with [Planning phase 1 (tests).md](https://github.com/vtexdocs/education-26h1-kr1/blob/master/docs/planning/Planning%20phase%201%20(tests).md).
+  1. Document and communicate the initial plan for Phase 1 (testing phase): scope, timelines, discovery paths (External search, Internal search, MCP, External LLMs), and deliverables. Align with [Phase 1 - Testing](https://github.com/vtexdocs/education-26h1-kr1/blob/master/docs/Planning/Phase%201%20-%20Testing.md).
   2. Set up the project structure in the repo: define folder layout, key documentation locations, and any templates or placeholders needed for the test suite and subsequent work.
   3. Run kick-off meeting
 
@@ -39,7 +39,7 @@ This document organises tasks for **KR1: Documentation infrastructure for conten
 
 - **Name:** Create issue/query template and example row
 - **Description:**
-  1. Define the template for each test-suite row with columns and cell format as in [Planning phase 1 (tests).md](Planning%20phase%201%20(tests).html) §3.4 and §3.4.1 (Spreadsheet data format): issue_id, persona, product, user_intent, expected_doc_url; query_external, query_internal, query_mcp, query_llm (each query column = stringified JSON array of 3 objects with `query` and `style`).
+  1. Define the template for each test-suite row with columns and cell format as in [Phase 1 - Testing](Phase%201%20-%20Testing.md) §3.4 and §3.4.1 (Spreadsheet data format): issue_id, persona, product, user_intent, expected_doc_url; query_external, query_internal, query_mcp, query_llm (each query column = stringified JSON array of 3 objects with `query` and `style`).
   2. Document the template and how to fill each field.
   3. Add one complete example row (e.g. guest checkout) so tech writers can follow the same format when submitting issues. The template is used in the [baseline test suite spreadsheet](https://docs.google.com/spreadsheets/d/1PbbIDcIhRnBQJPQzA-N-lifxURH_ywohXUqd9nAldZg/edit?gid=0#gid=0).
 

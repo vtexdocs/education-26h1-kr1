@@ -39,11 +39,11 @@ The agent receives the command; the user may append parameters after the command
   - **`'Decision maker'`** — Checking platform capabilities, security, compliance, business features, strategic evaluation, platform comparison. Examples: "VTEX security features", "Platform compliance", "What capabilities does VTEX offer".
   - If the persona cannot be inferred from the user intent or document content, ask the user to specify which persona applies.
 - For **each selected query type**, generate **exactly three queries**, one per style:
-  - **naive** — Plain-language goal or problem; no product jargon.
+  - **naive** — Plain-language goal or problem; no product jargon. **Note:** For external search (A), even naive queries must include 'VTEX' explicitly.
   - **familiar** — Some product/domain terms; not the exact feature name.
   - **expert** — Official or canonical phrasing; close to doc/feature name.
 - **Wording by query type:**
-  - **External search (A):** Natural-language.
+  - **External search (A):** Natural-language. **IMPORTANT:** All external search queries (naive, familiar, and expert) must always include the term 'VTEX' explicitly. Even naive queries should mention VTEX (e.g., "How to enable guest checkout in VTEX" rather than just "How to enable guest checkout").
   - **Internal search (B):** Short, keyword-style.
   - **MCP (C):** MCP-appropriate phrasing (how the MCP is invoked).
   - **External LLMs (D):** User-style questions (how users ask ChatGPT, Claude, etc.).

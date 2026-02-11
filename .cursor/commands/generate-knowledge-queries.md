@@ -33,7 +33,11 @@ The agent receives the command; the user may append parameters after the command
 
 - If the user gave a **target document** (URL or markdown): infer the user issue (product, user intent, expected_doc_url) from the doc; you may ask for issue_id, persona, and product if not inferrable.
 - **expected_doc_url:** If the user provided a document topic or description but not a URL, use the **vtexdocs MCP** (`mcp_vtexdocs_search_documentation` and `mcp_vtexdocs_fetch_document`) to search for and retrieve the relevant VTEX documentation URL. Use this URL as the `expected_doc_url` field.
-- **persona:** Must be one of: `'Developer'`, `'Store operator'`, `'Decision maker'`. If not provided or inferrable, ask the user to specify which persona applies.
+- **persona:** Must be one of: `'Developer'`, `'Store operator'`, `'Decision maker'`. Determine the persona based on the user intent or document content:
+  - **`'Store operator'`** — Admin panel tasks, catalog management, payment method setup, inventory management, order management, configuration tasks in the VTEX admin interface. Examples: "How to configure payment methods", "Setting up product catalog", "Managing orders".
+  - **`'Developer'`** — Storefront customization, Backoffice integration, APIs, development tasks, code integration, technical implementation. Examples: "How to customize storefront", "API integration", "Backoffice app development".
+  - **`'Decision maker'`** — Checking platform capabilities, security, compliance, business features, strategic evaluation, platform comparison. Examples: "VTEX security features", "Platform compliance", "What capabilities does VTEX offer".
+  - If the persona cannot be inferred from the user intent or document content, ask the user to specify which persona applies.
 - For **each selected query type**, generate **exactly three queries**, one per style:
   - **naive** — Plain-language goal or problem; no product jargon.
   - **familiar** — Some product/domain terms; not the exact feature name.
@@ -48,7 +52,7 @@ The agent receives the command; the user may append parameters after the command
 ### 3. Create Markdown document
 
 - Create a new `.md` file (e.g. in `docs/test-suite/issues/` or a path you propose) containing:
-  - **Issue:** issue_id, persona (must be one of: `'Developer'`, `'Store operator'`, `'Decision maker'`), product, user_intent, expected_doc_url (and optional source).
+  - **Issue:** issue_id, persona (must be one of: `'Developer'`, `'Store operator'`, `'Decision maker'` — see persona decision criteria in step 2), product, user_intent, expected_doc_url (and optional source).
   - **Queries:** for each selected query type, the type name and the three queries (naive, familiar, expert) in a clear table or list.
 - Save the file and tell the user where it is.
 
@@ -80,4 +84,5 @@ The agent receives the command; the user may append parameters after the command
 ## Reference
 
 - Query structure and query types: `docs/planning/Planning phase 1 (tests).md` (§2, §3.3, §3.4, Appendix A).
+- Persona definitions and target proportions: `docs/planning/Planning phase 1 (tests).md` (§3.1).
 - Cursor commands: [Commands](https://cursor.com/docs/context/commands).

@@ -10,7 +10,7 @@ The agent receives the command; the user may append parameters after the command
 
 1. **User issue OR target document** (required)
    - **User issue:** Short description of the user intent (e.g. "How to enable guest checkout").
-   - **Target document:** Markdown content or URL of the doc that should be found (expected outcome). Use this to infer the user issue and generate queries that should surface this doc.
+   - **Target document:** Markdown content or URL of the doc that should be found (expected outcome). Use this to infer the user issue and generate queries that should surface this doc. If only a topic/description is provided without a URL, use the **vtexdocs MCP** to search for and retrieve the relevant VTEX documentation URL.
 
 2. **Query type(s)** (optional, default: all)
    - One or more query types. If not provided, the agent generates queries for **all** query types (A, B, C, D). To restrict, the user may append one or more letters (e.g. "A B C"):
@@ -32,6 +32,8 @@ The agent receives the command; the user may append parameters after the command
 ### 2. Generate queries
 
 - If the user gave a **target document** (URL or markdown): infer the user issue (product, user intent, expected_doc_url) from the doc; you may ask for issue_id, persona, and product if not inferrable.
+- **expected_doc_url:** If the user provided a document topic or description but not a URL, use the **vtexdocs MCP** (`mcp_vtexdocs_search_documentation` and `mcp_vtexdocs_fetch_document`) to search for and retrieve the relevant VTEX documentation URL. Use this URL as the `expected_doc_url` field.
+- **persona:** Must be one of: `'Developer'`, `'Store operator'`, `'Decision maker'`. If not provided or inferrable, ask the user to specify which persona applies.
 - For **each selected query type**, generate **exactly three queries**, one per style:
   - **naive** — Plain-language goal or problem; no product jargon.
   - **familiar** — Some product/domain terms; not the exact feature name.
@@ -46,7 +48,7 @@ The agent receives the command; the user may append parameters after the command
 ### 3. Create Markdown document
 
 - Create a new `.md` file (e.g. in `docs/test-suite/issues/` or a path you propose) containing:
-  - **Issue:** issue_id, persona, product, user_intent, expected_doc_url (and optional source).
+  - **Issue:** issue_id, persona (must be one of: `'Developer'`, `'Store operator'`, `'Decision maker'`), product, user_intent, expected_doc_url (and optional source).
   - **Queries:** for each selected query type, the type name and the three queries (naive, familiar, expert) in a clear table or list.
 - Save the file and tell the user where it is.
 

@@ -29,8 +29,8 @@ This document outlines the project phases for **KR1: Documentation infrastructur
 |-------|----------|------------|--------|---------|
 | **1: Testing** | 6 weeks | Feb 3, 2026 | In progress | Establish baseline measurement across all discovery paths |
 | **2: Implementation** | 8 weeks | Mar 18, 2026 | Planned | Implement improvements based on baseline findings |
-| **3: Validation** | 4 weeks | May 13, 2026 | Planned | Validate improvements with follow-up test runs |
-| **4: Reporting & handoff** | 4 weeks | Jun 10, 2026 | Planned | Interpret results, create reports, present findings, and define next steps and guidelines |
+| **3: Validation** | 4 weeks | May 13, 2026 | Planned | Validate improvements with follow-up test runs and interpret results |
+| **4: Reporting & handoff** | 4 weeks | Jun 10, 2026 | Planned | Create reports, present findings, and define next steps and guidelines |
 
 ---
 
@@ -136,6 +136,7 @@ Validate that Phase 2 improvements have increased discoverability by re-running 
 2. **Compare metrics:** Calculate pass rates per path, per persona, overall; compare to baseline
 3. **Identify remaining gaps:** Document any issues that still fail after improvements
 4. **Analyze patterns:** Understand which improvements were most effective
+5. **Interpret results:** Analyze Phase 3 validation data, compare to baseline and Phase 2 improvements, identify patterns and insights
 
 ### Key deliverables
 
@@ -160,22 +161,21 @@ Validate that Phase 2 improvements have increased discoverability by re-running 
 
 ### Purpose
 
-Interpret Phase 3 validation results, create comprehensive reports, present findings to stakeholders, and define next steps and guidelines for the team to continue improving content discoverability.
+Create comprehensive reports, present findings to stakeholders, and define next steps and guidelines for the team to continue improving content discoverability.
 
 ### Scope
 
-1. **Interpret results:** Analyze Phase 3 validation data, compare to baseline and Phase 2 improvements, identify patterns and insights
-2. **Create reports:** Produce comprehensive reports documenting:
+1. **Create reports:** Produce comprehensive reports documenting:
    - Overall project outcomes and metrics
    - Comparison of baseline vs. post-improvement results
    - Analysis of what worked and what didn't
    - Remaining gaps and opportunities
-3. **Present to team:** Share findings with Education team and relevant stakeholders:
+2. **Present to team:** Share findings with Education team and relevant stakeholders:
    - Project summary and key achievements
    - Metrics and improvements achieved
    - Lessons learned
    - Recommendations for ongoing work
-4. **Define next steps and guidelines:** Establish:
+3. **Define next steps and guidelines:** Establish:
    - Guidelines for maintaining and improving content discoverability
    - Process for ongoing test suite maintenance and expansion
    - Recommendations for future improvements

@@ -1,4 +1,4 @@
-# KR1 — Project phases
+# Project phases
 
 | Field | Value |
 | :---- | :---- |

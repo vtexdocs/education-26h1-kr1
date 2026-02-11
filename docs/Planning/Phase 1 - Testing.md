@@ -1,4 +1,4 @@
-# 26H1 KR 1 — Testing phase plan
+# Phase 1: Testing
 
 | Field    | Value |
 | :------- | :---- |

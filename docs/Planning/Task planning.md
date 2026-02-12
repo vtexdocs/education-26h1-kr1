@@ -276,6 +276,24 @@ This document organises tasks for **KR1: Documentation infrastructure for conten
 - **Assignee:** Unassigned
 - **Priority:** High
 
+#### [Localize test suite for multi-locale testing](https://vtex-dev.atlassian.net/browse/EDU-17517) — EDU-17517 (To Do)
+
+- **Name:** Localize test suite for multi-locale testing
+- **Jira issue:** [EDU-17517](https://vtex-dev.atlassian.net/browse/EDU-17517)
+- **Status:** To Do
+- **Description:**
+  1. Localize the test suite infrastructure to support running tests in multiple locales: Portuguese (PT), English (EN), and Spanish (ES).
+  2. Update test suite artifact structure to include locale-specific query variants or locale metadata for each test case.
+  3. Modify all path runners to accept and use locale parameters when executing queries (e.g., set locale headers for API calls, use locale-specific search endpoints where available).
+  4. Ensure the unified output format includes locale information for each test result.
+  5. Update aggregation and metrics computation to analyze results by locale, enabling comparison of knowledge finding infrastructure performance across PT, EN, and ES.
+  6. Document the localization approach and any locale-specific considerations for each discovery path.
+
+  *Project repo:* [education-26h1-kr1](https://github.com/vtexdocs/education-26h1-kr1)
+- **Due date:** 2026-03-04
+- **Assignee:** Pedro Antunes Costa
+- **Priority:** Medium
+
 #### [Run smoke tests — Google Search path](https://vtex-dev.atlassian.net/browse/EDU-17436) — EDU-17436 (Backlog)
 
 - **Name:** Run smoke tests — Google Search path

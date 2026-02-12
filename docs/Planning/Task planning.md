@@ -1,4 +1,4 @@
-# Task planning — KR1 Phase 1 (Testing phase)
+# Task planning
 
 ## Intro
 

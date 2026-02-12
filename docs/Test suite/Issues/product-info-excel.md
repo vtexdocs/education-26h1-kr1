@@ -17,14 +17,14 @@
 
 | style | query |
 |-------|--------|
-| naive | get all my products in a spreadsheet |
+| naive | get all my VTEX products in a spreadsheet |
 | familiar | VTEX export catalog to Excel |
 | expert | export all product information to Excel VTEX |
 
 **Array (query_external):**
 ```json
 [
-  { "query": "get all my products in a spreadsheet", "style": "naive" },
+  { "query": "get all my VTEX products in a spreadsheet", "style": "naive" },
   { "query": "VTEX export catalog to Excel", "style": "familiar" },
   { "query": "export all product information to Excel VTEX", "style": "expert" }
 ]

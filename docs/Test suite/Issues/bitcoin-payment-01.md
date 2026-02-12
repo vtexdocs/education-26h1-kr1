@@ -3,7 +3,7 @@
 | Field | Value |
 |-------|--------|
 | **issue_id** | bitcoin-payment-01 |
-| **persona** | Store Operator |
+| **persona** | Store operator |
 | **product** | Payments |
 | **user_intent** | How to configure bitcoin as a payment method in my VTEX store. |
 | **expected_doc_url** | https://help.vtex.com/docs/tutorials/enabling-payments-with-bitcoin |

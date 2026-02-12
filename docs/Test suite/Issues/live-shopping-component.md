@@ -3,7 +3,7 @@
 | Field | Value |
 |-------|--------|
 | **issue_id** | live-shopping-component-01 |
-| **persona** | Store Admin |
+| **persona** | Store operator |
 | **product** | Live Shopping / Storefront |
 | **user_intent** | How to place the Live Shopping component on the storefront |
 | **expected_doc_url** | https://help.vtex.com/en/docs/tracks/placing-the-live-shopping-component |
@@ -17,14 +17,14 @@
 
 | style | query |
 |-------|--------|
-| naive | how to add live video player to my ecommerce website |
+| naive | how to add live video player to my VTEX ecommerce website |
 | familiar | VTEX Live Shopping component setup storefront |
 | expert | placing the Live Shopping component VTEX |
 
 **Array (query_external):**
 ```json
 [
-  { "query": "how to add live video player to my ecommerce website", "style": "naive" },
+  { "query": "how to add live video player to my VTEX ecommerce website", "style": "naive" },
   { "query": "VTEX Live Shopping component setup storefront", "style": "familiar" },
   { "query": "placing the Live Shopping component VTEX", "style": "expert" }
 ]

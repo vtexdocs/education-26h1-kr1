@@ -2,8 +2,8 @@
 
 ## Issue Details
 
-- **Issue ID:** TBD
-- **Persona:** Developer / DevOps Engineer
+- **Issue ID:** github-repository-migration-01
+- **Persona:** Developer
 - **Product:** WebOps / GitHub
 - **User Intent:** Learn how to migrate a repository from one GitHub organization to another
 - **Expected Doc URL:** TBD (target documentation for GitHub repository migration between organizations)
@@ -17,14 +17,14 @@ Natural-language queries for external search engines.
 
 | Style | Query |
 |-------|-------|
-| **naive** | how to move a code repository to a different company account |
+| **naive** | how to move a VTEX code repository to a different company account |
 | **familiar** | migrate GitHub repository to another organization |
 | **expert** | transfer GitHub repository ownership between organizations |
 
 **JSON Array:**
 ```json
 [
-  {"query": "how to move a code repository to a different company account", "style": "naive"},
+  {"query": "how to move a VTEX code repository to a different company account", "style": "naive"},
   {"query": "migrate GitHub repository to another organization", "style": "familiar"},
   {"query": "transfer GitHub repository ownership between organizations", "style": "expert"}
 ]

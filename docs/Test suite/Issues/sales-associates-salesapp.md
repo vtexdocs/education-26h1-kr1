@@ -3,7 +3,7 @@
 | Field | Value |
 |-------|--------|
 | **issue_id** | sales-associates-salesapp-01 |
-| **persona** | Store Admin |
+| **persona** | Store operator |
 | **product** | VTEX Sales App / Omnichannel |
 | **user_intent** | How to manage sales associates in VTEX Sales App (add, edit, inactivate) |
 | **expected_doc_url** | https://help.vtex.com/en/docs/tracks/managing-sales-associates-in-vtex-sales-app |
@@ -17,14 +17,14 @@
 
 | style | query |
 |-------|--------|
-| naive | how to add store employees to my point of sale app |
+| naive | how to add store employees to my VTEX point of sale app |
 | familiar | VTEX Sales App add sales associates |
 | expert | managing sales associates in VTEX Sales App |
 
 **Array (query_external):**
 ```json
 [
-  { "query": "how to add store employees to my point of sale app", "style": "naive" },
+  { "query": "how to add store employees to my VTEX point of sale app", "style": "naive" },
   { "query": "VTEX Sales App add sales associates", "style": "familiar" },
   { "query": "managing sales associates in VTEX Sales App", "style": "expert" }
 ]

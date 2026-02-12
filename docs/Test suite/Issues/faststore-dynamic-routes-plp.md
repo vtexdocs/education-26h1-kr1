@@ -4,7 +4,7 @@
 
 | Field | Value |
 |-------|-------|
-| **Issue ID** | FS-05 |
+| **Issue ID** | faststore-dynamic-routes-plp-01 |
 | **Persona** | Developer |
 | **Product** | FastStore |
 | **User Intent** | How to use dynamic routes for PLPs (Product Listing Pages) in a FastStore website |
@@ -21,14 +21,14 @@ Natural-language queries for organic web search:
 
 | Style | Query |
 |-------|-------|
-| **Naive** | how to make product category pages load different URLs in FastStore |
+| **Naive** | how to make product category pages load different URLs in VTEX FastStore |
 | **Familiar** | FastStore product listing page routing configuration |
 | **Expert** | how to implement dynamic routes for PLPs in FastStore |
 
 **JSON format:**
 ```json
 [
-  {"query":"how to make product category pages load different URLs in FastStore","style":"naive"},
+  {"query":"how to make product category pages load different URLs in VTEX FastStore","style":"naive"},
   {"query":"FastStore product listing page routing configuration","style":"familiar"},
   {"query":"how to implement dynamic routes for PLPs in FastStore","style":"expert"}
 ]

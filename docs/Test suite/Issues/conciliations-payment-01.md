@@ -3,7 +3,7 @@
 | Field | Value |
 |-------|--------|
 | **issue_id** | conciliations-payment-01 |
-| **persona** | Store Operator |
+| **persona** | Store operator |
 | **product** | Payments |
 | **user_intent** | How to manage bank reconciliations of payments made by bank slip. |
 | **expected_doc_url** | https://help.vtex.com/docs/tutorials/bank-reconciliations |

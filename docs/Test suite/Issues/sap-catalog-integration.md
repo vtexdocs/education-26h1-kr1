@@ -17,14 +17,14 @@
 
 | style | query |
 |-------|--------|
-| naive | bring my product catalog from my business software into my online store |
+| naive | bring my product catalog from my business software into my VTEX online store |
 | familiar | sync SAP product catalog to VTEX store |
 | expert | integrate catalog from SAP ERP to VTEX |
 
 **Array (query_external):**
 ```json
 [
-  { "query": "bring my product catalog from my business software into my online store", "style": "naive" },
+  { "query": "bring my product catalog from my business software into my VTEX online store", "style": "naive" },
   { "query": "sync SAP product catalog to VTEX store", "style": "familiar" },
   { "query": "integrate catalog from SAP ERP to VTEX", "style": "expert" }
 ]

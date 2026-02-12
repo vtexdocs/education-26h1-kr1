@@ -2,8 +2,8 @@
 
 ## Issue Details
 
-- **Issue ID:** TBD
-- **Persona:** Developer / DevOps Engineer
+- **Issue ID:** webops-github-connection-01
+- **Persona:** Developer
 - **Product:** WebOps
 - **User Intent:** Learn how to connect WebOps to GitHub for version control and deployment
 - **Expected Doc URL:** TBD (target documentation for WebOps GitHub integration)
@@ -17,14 +17,14 @@ Natural-language queries for external search engines.
 
 | Style | Query |
 |-------|-------|
-| **naive** | how do I link my website deployment tool to github |
+| **naive** | how do I link my VTEX website deployment tool to github |
 | **familiar** | connect WebOps to GitHub repository |
 | **expert** | VTEX WebOps GitHub integration setup guide |
 
 **JSON Array:**
 ```json
 [
-  {"query": "how do I link my website deployment tool to github", "style": "naive"},
+  {"query": "how do I link my VTEX website deployment tool to github", "style": "naive"},
   {"query": "connect WebOps to GitHub repository", "style": "familiar"},
   {"query": "VTEX WebOps GitHub integration setup guide", "style": "expert"}
 ]

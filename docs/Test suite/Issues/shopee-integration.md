@@ -17,14 +17,14 @@
 
 | style | query |
 |-------|--------|
-| naive | connect my online store to Shopee so I can sell there |
+| naive | connect my VTEX online store to Shopee so I can sell there |
 | familiar | VTEX Shopee marketplace connector setup |
 | expert | install and configure Shopee connector VTEX |
 
 **Array (query_external):**
 ```json
 [
-  { "query": "connect my online store to Shopee so I can sell there", "style": "naive" },
+  { "query": "connect my VTEX online store to Shopee so I can sell there", "style": "naive" },
   { "query": "VTEX Shopee marketplace connector setup", "style": "familiar" },
   { "query": "install and configure Shopee connector VTEX", "style": "expert" }
 ]

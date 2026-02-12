@@ -3,7 +3,7 @@
 | Field | Value |
 |-------|--------|
 | **issue_id** | product-not-visible-01 |
-| **persona** | Store Admin |
+| **persona** | Store operator |
 | **product** | Catalog / Products |
 | **user_intent** | Why is the product not visible on the website / troubleshoot product visibility |
 | **expected_doc_url** | https://help.vtex.com/faq/why-is-the-product-not-visible-on-the-website |
@@ -17,14 +17,14 @@
 
 | style | query |
 |-------|--------|
-| naive | my products are not showing on my online store |
+| naive | my products are not showing on my VTEX online store |
 | familiar | VTEX product not visible on website |
 | expert | why is the product not visible on the website VTEX |
 
 **Array (query_external):**
 ```json
 [
-  { "query": "my products are not showing on my online store", "style": "naive" },
+  { "query": "my products are not showing on my VTEX online store", "style": "naive" },
   { "query": "VTEX product not visible on website", "style": "familiar" },
   { "query": "why is the product not visible on the website VTEX", "style": "expert" }
 ]

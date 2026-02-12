@@ -3,7 +3,7 @@
 | Field | Value |
 |-------|--------|
 | **issue_id** | conditions-payment-01 |
-| **persona** | Store Operator |
+| **persona** | Store operator |
 | **product** | Payments |
 | **user_intent** | How to configure special conditions for payment methods registered in my VTEX store. |
 | **expected_doc_url** | https://help.vtex.com/docs/tutorials/special-conditions |

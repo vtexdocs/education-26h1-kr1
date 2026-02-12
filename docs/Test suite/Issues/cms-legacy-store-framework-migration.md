@@ -2,8 +2,8 @@
 
 ## Issue Details
 
-- **Issue ID:** TBD
-- **Persona:** Technical Lead / Store Owner
+- **Issue ID:** cms-migration-01
+- **Persona:** Developer
 - **Product:** VTEX Store Framework / CMS
 - **User Intent:** Understand the production environment impacts and rollback possibilities when migrating a store from CMS Legacy to Store Framework
 - **Expected Document URL:** TBD (needs to be identified)
@@ -15,14 +15,14 @@ Natural-language queries for external search engines.
 
 | Style | Query |
 |-------|-------|
-| **naive** | How to migrate my online store without breaking it and how to undo if something goes wrong |
+| **naive** | How to migrate my VTEX online store without breaking it and how to undo if something goes wrong |
 | **familiar** | VTEX CMS Legacy to Store Framework migration production impact and rollback |
 | **expert** | VTEX Store Framework migration production deployment strategy rollback procedures CMS Legacy |
 
 **JSON Array:**
 ```json
 [
-  {"query": "How to migrate my online store without breaking it and how to undo if something goes wrong", "style": "naive"},
+  {"query": "How to migrate my VTEX online store without breaking it and how to undo if something goes wrong", "style": "naive"},
   {"query": "VTEX CMS Legacy to Store Framework migration production impact and rollback", "style": "familiar"},
   {"query": "VTEX Store Framework migration production deployment strategy rollback procedures CMS Legacy", "style": "expert"}
 ]

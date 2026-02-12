@@ -19,14 +19,14 @@
 
 | style | query |
 |-------|--------|
-| naive | accept instant bank transfers from customers in my online store |
+| naive | accept instant bank transfers from customers in my VTEX online store |
 | familiar | enable PIX payment in my VTEX store |
 | expert | how to set up PIX payment provider in VTEX |
 
 **Array (query_external):**
 ```json
 [
-  { "query": "accept instant bank transfers from customers in my online store", "style": "naive" },
+  { "query": "accept instant bank transfers from customers in my VTEX online store", "style": "naive" },
   { "query": "enable PIX payment in my VTEX store", "style": "familiar" },
   { "query": "how to set up PIX payment provider in VTEX", "style": "expert" }
 ]

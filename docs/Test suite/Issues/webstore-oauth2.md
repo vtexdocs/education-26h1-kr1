@@ -17,14 +17,14 @@
 
 | style | query |
 |-------|--------|
-| naive | let customers log in with our company login instead of creating a new account |
+| naive | let customers log in with our company login instead of creating a new account in VTEX |
 | familiar | custom OAuth login for webstore VTEX identity provider |
 | expert | VTEX webstore custom OAuth 2.0 integration guide |
 
 **Array (query_external):**
 ```json
 [
-  { "query": "let customers log in with our company login instead of creating a new account", "style": "naive" },
+  { "query": "let customers log in with our company login instead of creating a new account in VTEX", "style": "naive" },
   { "query": "custom OAuth login for webstore VTEX identity provider", "style": "familiar" },
   { "query": "VTEX webstore custom OAuth 2.0 integration guide", "style": "expert" }
 ]

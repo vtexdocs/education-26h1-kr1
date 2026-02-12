@@ -17,14 +17,14 @@
 
 | style | query |
 |-------|--------|
-| naive | how to add live video streaming to my online store |
+| naive | how to add live video streaming to my VTEX online store |
 | familiar | VTEX FastStore live shopping setup |
 | expert | implementing live shopping for FastStore VTEX |
 
 **Array (query_external):**
 ```json
 [
-  { "query": "how to add live video streaming to my online store", "style": "naive" },
+  { "query": "how to add live video streaming to my VTEX online store", "style": "naive" },
   { "query": "VTEX FastStore live shopping setup", "style": "familiar" },
   { "query": "implementing live shopping for FastStore VTEX", "style": "expert" }
 ]

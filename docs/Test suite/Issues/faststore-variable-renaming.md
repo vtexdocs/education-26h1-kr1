@@ -2,7 +2,7 @@
 
 ## Issue Details
 
-- **Issue ID:** ISS-004
+- **Issue ID:** faststore-variable-renaming-01
 - **Persona:** Developer
 - **Product:** FastStore
 - **User Intent:** Learn how to rename variables in a FastStore project
@@ -17,14 +17,14 @@
 
 | Style | Query |
 |-------|-------|
-| **Naive** | how do I change variable names in my faststore site |
+| **Naive** | how do I change variable names in my VTEX faststore site |
 | **Familiar** | renaming variables faststore project |
 | **Expert** | FastStore variable renaming configuration |
 
 **Array format:**
 ```json
 [
-  {"query": "how do I change variable names in my faststore site", "style": "naive"},
+  {"query": "how do I change variable names in my VTEX faststore site", "style": "naive"},
   {"query": "renaming variables faststore project", "style": "familiar"},
   {"query": "FastStore variable renaming configuration", "style": "expert"}
 ]

@@ -2,8 +2,8 @@
 
 ## Issue Details
 
-- **Issue ID:** TBD (to be assigned)
-- **Persona:** Store administrator / Developer
+- **Issue ID:** pwa-implementation-01
+- **Persona:** Developer
 - **Product:** VTEX IO Store Framework
 - **User Intent:** Learn how to convert their store website into a Progressive Web App (PWA)
 - **Expected Doc URL:** TBD (target documentation for PWA implementation in VTEX)
@@ -15,14 +15,14 @@
 
 | Style | Query |
 |-------|-------|
-| Naive | how do I make my online store work offline and install like an app |
+| Naive | how do I make my VTEX online store work offline and install like an app |
 | Familiar | convert ecommerce site to progressive web app |
 | Expert | VTEX IO PWA implementation guide |
 
 **JSON Array:**
 ```json
 [
-  {"query": "how do I make my online store work offline and install like an app", "style": "naive"},
+  {"query": "how do I make my VTEX online store work offline and install like an app", "style": "naive"},
   {"query": "convert ecommerce site to progressive web app", "style": "familiar"},
   {"query": "VTEX IO PWA implementation guide", "style": "expert"}
 ]

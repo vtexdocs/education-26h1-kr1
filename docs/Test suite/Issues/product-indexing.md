@@ -3,7 +3,7 @@
 | Field | Value |
 |-------|--------|
 | **issue_id** | product-indexing-01 |
-| **persona** | Store Admin |
+| **persona** | Store operator |
 | **product** | Catalog / Search |
 | **user_intent** | How to solve product indexing problems |
 | **expected_doc_url** | https://help.vtex.com/en/tutorial/understanding-how-indexation-works |
@@ -17,14 +17,14 @@
 
 | style | query |
 |-------|--------|
-| naive | my products are not updating in search results on my store |
+| naive | my products are not updating in search results on my VTEX store |
 | familiar | VTEX product indexing issues troubleshooting |
 | expert | VTEX catalog indexing problems solution |
 
 **Array (query_external):**
 ```json
 [
-  { "query": "my products are not updating in search results on my store", "style": "naive" },
+  { "query": "my products are not updating in search results on my VTEX store", "style": "naive" },
   { "query": "VTEX product indexing issues troubleshooting", "style": "familiar" },
   { "query": "VTEX catalog indexing problems solution", "style": "expert" }
 ]

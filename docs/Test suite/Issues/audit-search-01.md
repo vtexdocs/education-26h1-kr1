@@ -3,9 +3,9 @@
 | Field | Value |
 |-------|--------|
 | **issue_id** | audit-search-01 |
-| **persona** | Store operator |
+| **persona** | Decision maker |
 | **product** | Audit / Storage |
-| **user_intent** | How to search and investigate audit events to track operations, authors, and timestamps in VTEX Admin. |
+| **user_intent** | Evaluate VTEX platform audit capabilities for security and compliance requirements. |
 | **expected_doc_url** | https://help.vtex.com/pt/docs/tutorials/audit |
 | **source** | Command input (target document URL) |
 
@@ -17,16 +17,16 @@
 
 | style | query |
 |-------|--------|
-| naive | how to search audit events in vtex |
-| familiar | vtex audit log search |
-| expert | vtex audit events |
+| naive | does vtex have audit logging capabilities |
+| familiar | vtex audit trail security compliance |
+| expert | vtex audit platform security features |
 
 **Array (query_external):**
 ```json
 [
-  { "query": "how to search audit events in vtex", "style": "naive" },
-  { "query": "vtex audit log search", "style": "familiar" },
-  { "query": "vtex audit events", "style": "expert" }
+  { "query": "does vtex have audit logging capabilities", "style": "naive" },
+  { "query": "vtex audit trail security compliance", "style": "familiar" },
+  { "query": "vtex audit platform security features", "style": "expert" }
 ]
 ```
 
@@ -34,15 +34,15 @@
 
 | style | query |
 |-------|--------|
-| naive | audit events search |
-| familiar | audit log |
+| naive | audit capabilities security |
+| familiar | audit trail compliance |
 | expert | audit |
 
 **Array (query_internal):**
 ```json
 [
-  { "query": "audit events search", "style": "naive" },
-  { "query": "audit log", "style": "familiar" },
+  { "query": "audit capabilities security", "style": "naive" },
+  { "query": "audit trail compliance", "style": "familiar" },
   { "query": "audit", "style": "expert" }
 ]
 ```
@@ -51,15 +51,15 @@
 
 | style | query |
 |-------|--------|
-| naive | vtex docs on audit events |
-| familiar | vtex audit search |
+| naive | vtex docs on audit capabilities and security |
+| familiar | vtex audit trail features |
 | expert | audit |
 
 **Array (query_mcp):**
 ```json
 [
-  { "query": "vtex docs on audit events", "style": "naive" },
-  { "query": "vtex audit search", "style": "familiar" },
+  { "query": "vtex docs on audit capabilities and security", "style": "naive" },
+  { "query": "vtex audit trail features", "style": "familiar" },
   { "query": "audit", "style": "expert" }
 ]
 ```
@@ -68,15 +68,15 @@
 
 | style | query |
 |-------|--------|
-| naive | how do i search audit events in vtex |
-| familiar | how to find audit logs in vtex admin |
-| expert | how to search audit events in vtex |
+| naive | what audit capabilities does vtex provide |
+| familiar | how does vtex handle audit trails and compliance |
+| expert | what audit and security features are available in vtex |
 
 **Array (query_llm):**
 ```json
 [
-  { "query": "how do i search audit events in vtex", "style": "naive" },
-  { "query": "how to find audit logs in vtex admin", "style": "familiar" },
-  { "query": "how to search audit events in vtex", "style": "expert" }
+  { "query": "what audit capabilities does vtex provide", "style": "naive" },
+  { "query": "how does vtex handle audit trails and compliance", "style": "familiar" },
+  { "query": "what audit and security features are available in vtex", "style": "expert" }
 ]
 ```
